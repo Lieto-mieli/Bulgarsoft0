@@ -50,28 +50,19 @@ public class Pathfinding {
             }
             currentDebug.Clear();
         }
-        int array = 0;
         for (int x = 0; x < grid.gridArray.GetLength(0); x++)
         {
             for (int y = 0; y < grid.gridArray.GetLength(1); y++)
             {
                 if (grid.gridArray[x, y].isWalkable)
                 {
-                    if (array >= currentDebug.Count)
-                    {
-                        currentDebug.Add(new GameObject());
-                    }
-                    currentDebug[array] = Object.Instantiate(debugBoxes[0], new Vector3(x * grid.cellSize, y * grid.cellSize, 99), new Quaternion());
+                        currentDebug.Add(Object.Instantiate(debugBoxes[0], new Vector3(x * grid.cellSize, y * grid.cellSize, 99), new Quaternion()));
+                    
                 }
                 else if (!grid.gridArray[x, y].isWalkable)
                 {
-                    if (array >= currentDebug.Count)
-                    {
-                        currentDebug.Add(new GameObject());
-                    }
-                    currentDebug[array] = Object.Instantiate(debugBoxes[1], new Vector3(x * grid.cellSize, y * grid.cellSize, 99), new Quaternion());
+                        currentDebug.Add(Object.Instantiate(debugBoxes[1], new Vector3(x * grid.cellSize, y * grid.cellSize, 99), new Quaternion()));
                 }
-                array++;
             }
         }
     }

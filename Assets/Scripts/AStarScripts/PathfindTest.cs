@@ -85,14 +85,18 @@ public class PathfindTest : MonoBehaviour
     }
     public List<Vector2> ShortcutPath(List<PathNode> input, Vector2 origin, Vector2 destination)
     {
+        //bool removeFirst = true;
         List<Vector2> output = new List<Vector2>() {origin};
         int inputArray = 0;
-        Vector2 curChoice = new Vector2();
+        Vector2 curChoice = Vector2.zero;
         while (inputArray < input.Count)
         {
             if (LoSCheck.NewLineCheck(output[output.Count - 1], new Vector2(input[inputArray].x, input[inputArray].y), new List<string>{ "Terrain" }))
             {
-                if (curChoice == Vector2.zero)
+                if (inputArray == 0)
+                {
+                }
+                else if (curChoice == Vector2.zero)
                 {
                     output.Add(new Vector2(input[inputArray].x, input[inputArray].y));
                 }
@@ -106,9 +110,10 @@ public class PathfindTest : MonoBehaviour
             {
                 curChoice = new Vector2(input[inputArray].x, input[inputArray].y);
             }
-            inputArray++;
+                inputArray++;
         }
         output.Add(destination);
+        output.Remove(origin);
         return output;
     }
 }
