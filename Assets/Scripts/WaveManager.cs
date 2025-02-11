@@ -28,7 +28,7 @@ public class WaveManager : MonoBehaviour
     {
         if (true)
         {
-            Vector2 temp = new Vector2(-10,Random.Range(-1.9f,1.9f));
+            Vector2 temp = new Vector2(1, Random.Range(2, 8));
             Instantiate(Enemy1,temp,new Quaternion());
         }
     }

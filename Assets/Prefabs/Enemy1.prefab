@@ -101,5 +101,5 @@ MonoBehaviour:
   hitPoints: 3
   attackDamage: 1
   attackRange: 2
-  attackDelay: 2
-  fent: {fileID: 0}
+  attackCooldown: 2.5
+  attackEndlag: 0.4

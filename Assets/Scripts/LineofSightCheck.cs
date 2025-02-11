@@ -52,7 +52,7 @@ public class LineofSightCheck : MonoBehaviour
                 tagCheck = true;
             }
         }
-        Debug.Log(tagCheck);
+        //Debug.Log(tagCheck);
         return tagCheck;
     }
     public List<Vector2> CalculateColliderPoints(Vector3[] linePoints)
@@ -73,10 +73,10 @@ public class LineofSightCheck : MonoBehaviour
             positions[1] + right * width,
             positions[0] + right * width,
         };
-        foreach (Vector2 position in raycastPoints)
-        {
-            Debug.Log($"{position.x}, {position.y}");
-        }
+        //foreach (Vector2 position in raycastPoints)
+        //{
+        //    Debug.Log($"{position.x}, {position.y}");
+        //}
         return raycastPoints;
         //float m =  (positions[1].y - positions[0].y) / (positions[1].x - positions[0].x);
         //float xDelta = (width / 2) * (m / Mathf.Pow(m * m + 1, 0.5f));
@@ -105,23 +105,30 @@ public class LineofSightCheck : MonoBehaviour
     public bool RaycastCheck(List<Vector2> points, string tagToCheck)
     {
         bool returnValue = false;
-        RaycastHit2D hit0;
-        RaycastHit2D hit1;
+        RaycastHit2D[] hit0 = new RaycastHit2D[99];
+        RaycastHit2D[] hit1 = new RaycastHit2D[99]; ;
         Vector2 direction0 = points[1] - points[0];
         Vector2 direction1 = points[2] - points[3];
+        ContactFilter2D filt = new ContactFilter2D();
 
         float distance = Vector2.Distance(points[0], points[1]);
-        hit0 = Physics2D.Raycast(points[0], direction0, distance);
+        Physics2D.Raycast(points[0], direction0, filt, hit0, distance) ;
         Debug.DrawLine(points[0], points[0] + direction0.normalized * distance, Color.magenta, 7f);
-        hit1 = Physics2D.Raycast(points[3], direction1, distance);
+        Physics2D.Raycast(points[3], direction1, filt, hit1, distance);
         Debug.DrawLine(points[3], points[3] + direction1.normalized * distance, Color.magenta, 7f);
-        if (hit0.collider != null)
+        foreach(RaycastHit2D hit in hit0)
         {
-            if (hit0.collider.gameObject.CompareTag(tagToCheck)) { returnValue = true; }
+            if (hit.collider != null)
+            {
+                if (hit.collider.gameObject.CompareTag(tagToCheck)) { returnValue = true; }
+            }
         }
-        if (hit1.collider != null)
+        foreach (RaycastHit2D hit in hit1)
         {
-            if (hit1.collider.gameObject.CompareTag(tagToCheck)) { returnValue = true; }
+            if (hit.collider != null)
+            {
+                if (hit.collider.gameObject.CompareTag(tagToCheck)) { returnValue = true; }
+            }
         }
         return returnValue;
     }
