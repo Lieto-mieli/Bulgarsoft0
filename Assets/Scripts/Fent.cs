@@ -6,36 +6,73 @@ using UnityEngine;
 public class Fent : GuardAITemplate
 {
     // Start is called before the first frame update
+    static float ability1Cooldown = 45;
+    static float ability1Duration = 15;
+    public float curAbility1Cooldown;
+    float curAbility1Duration;
+    List<GameObject> ability1Targets;
+    bool ability1Active;
     void Start()
     {
+        ability1Active = false;
         hitPoints = 100;
         selected = false;
         selector = GameObject.FindWithTag("Selector");
         targetLists = GameObject.FindWithTag("TargetLists").GetComponent<AttackTargetLists>();
         targetLists.playerTargets.Add(gameObject);
+        Vector3 tempPos = transform.position;
+        tempPos.z = tempPos.y;
+        transform.position = tempPos;
     }
 
     // Update is called once per frame
     void Update()
     {
+        curAbility1Cooldown -= Time.deltaTime;
+        curAbility1Duration -= Time.deltaTime;
         //Debug.Log(selector.name);
         selected = selector.GetComponent<Selector>().buildingSelected == this.gameObject;
         if (hitPoints <= 0)
         {
             GameOver();
         }
+        if (curAbility1Duration <= 0)
+        {
+            ability1Active = false;
+        } 
+        if (ability1Targets!=null)
+        {
+            if (!ability1Active && ability1Targets.Count != 0)
+            {
+                foreach (GameObject guard in ability1Targets)
+                {
+                    guard.GetComponent<GuardAITemplate>().atkSpeedMult = 1.0f;
+                }
+                ability1Targets.Clear();
+            }
+            else if (ability1Targets.Count != 0)
+            {
+                foreach (GameObject guard in ability1Targets)
+                {
+                    if (guard.GetComponent<GuardAITemplate>().atkSpeedMult != 1.3f)
+                    {
+                        guard.GetComponent<GuardAITemplate>().atkSpeedMult = 1.3f;
+                    }
+                }
+            }
+        }
     }
     void OnMouseDown()
     {
         //Debug.Log("mods, kill this guy.");
-        if (!selected)
-        {
-            selector.GetComponent<Selector>().SelectBuilding(this.gameObject);
-        }
-        else
-        {
-            selector.GetComponent<Selector>().DeselectBuilding();
-        }
+        //if (!selected)
+        //{
+        //    selector.GetComponent<Selector>().SelectBuilding(this.gameObject);
+        //}
+        //else
+        //{
+        //    selector.GetComponent<Selector>().DeselectBuilding();
+        //}
     }
     public void GameOver()
     {
@@ -48,5 +85,26 @@ public class Fent : GuardAITemplate
     new public void AttackTarget(GameObject target)
     {
         //Cannot attack
+    }
+    public void CallToArms()
+    {
+        ability1Targets = new List<GameObject>();
+        if (curAbility1Cooldown <= 0)
+        {
+            curAbility1Cooldown = ability1Cooldown;
+            foreach (GameObject guard in GameObject.FindGameObjectsWithTag("Guard"))
+            {
+                if (Vector2.Distance(guard.transform.position, this.transform.position) <= 10)
+                {
+                    ability1Targets.Add(guard);
+                }
+            }
+            foreach(GameObject guard in ability1Targets)
+            {
+                guard.GetComponent<GuardAITemplate>().atkSpeedMult = 1.3f;
+            }
+            ability1Active = true;
+            curAbility1Duration = ability1Duration;
+        }
     }
 }

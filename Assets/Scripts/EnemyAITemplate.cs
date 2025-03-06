@@ -91,13 +91,15 @@ public class EnemyAITemplate : MonoBehaviour
                 {
                     //Debug.Log("moving");
                     curPos = new Vector2(transform.position.x, transform.position.y);
-                    curPos.z = curPos.y;
                     transform.position = Vector2.MoveTowards(curPos, shortcutPath[0], moveSpeed * Time.deltaTime);
                     if (Vector2.Distance((Vector2)curPos, shortcutPath[0]) < 0.02f)
                     {
                         shortcutPath.Remove(shortcutPath[0]);
                         if (shortcutPath.Count < 1) { currentState = EnemyState.Passive; }
                     }
+                    Vector3 tempPos = transform.position;
+                    tempPos.z = tempPos.y;
+                    transform.position = tempPos;
                 }
             }
         }

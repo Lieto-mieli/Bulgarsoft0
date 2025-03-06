@@ -13,9 +13,9 @@ public class SelectSquareEdge : MonoBehaviour
     }
     public edge which;
     public GameObject square;
-    RectTransform rectTransform;
-    Transform trans;
-    Vector2 temp;
+    public RectTransform rectTransform;
+    public Transform trans;
+    public Vector2 temp;
     void Start()
     {
         rectTransform = square.GetComponent<RectTransform>();
@@ -23,31 +23,35 @@ public class SelectSquareEdge : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (which == edge.N)
-        {
-            temp = trans.localScale;
-            temp.x = rectTransform.sizeDelta.x+2;
-            trans.localScale = temp;
-        }
-        if (which == edge.E)
-        {
-            temp = trans.localScale;
-            temp.y = rectTransform.sizeDelta.y+2;
-            trans.localScale = temp;
-        }
-        if (which == edge.S)
-        {
-            temp = trans.localScale;
-            temp.x = -rectTransform.sizeDelta.x-2;
-            trans.localScale = temp;
-        }
-        if (which == edge.W)
-        {
-            temp = trans.localScale;
-            temp.y = -rectTransform.sizeDelta.y-2;
-            trans.localScale = temp;
-        }
-    }
+    //void Update()
+    //{
+    //    if (which == edge.N)
+    //    {
+    //        temp = trans.localScale;
+    //        temp.x = rectTransform.sizeDelta.x+2;
+    //        temp.y = 1;
+    //        trans.localScale = temp;
+    //    }
+    //    if (which == edge.E)
+    //    {
+    //        temp = trans.localScale;
+    //        temp.y = rectTransform.sizeDelta.y+2;
+    //        temp.x = 1;
+    //        trans.localScale = temp;
+    //    }
+    //    if (which == edge.S)
+    //    {
+    //        temp = trans.localScale;
+    //        temp.x = -rectTransform.sizeDelta.x-2;
+    //        temp.y = 1;
+    //        trans.localScale = temp;
+    //    }
+    //    if (which == edge.W)
+    //    {
+    //        temp = trans.localScale;
+    //        temp.y = -rectTransform.sizeDelta.y-2;
+    //        temp.x = 1;
+    //        trans.localScale = temp;
+    //    }
+    //}
 }

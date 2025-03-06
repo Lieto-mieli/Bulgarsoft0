@@ -10,6 +10,7 @@ TagManager:
   - TargetLists
   - Terrain
   - Pathfinder
+  - Building
   layers:
   - Default
   - TransparentFX

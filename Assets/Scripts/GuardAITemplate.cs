@@ -30,6 +30,7 @@ public class GuardAITemplate : MonoBehaviour
     public Pathfinder pathfinder;
     List<Vector2> shortcutPath;
     GuardState currentState;
+    public float atkSpeedMult = 1;
     enum GuardState
     {
         Passive,
@@ -42,7 +43,6 @@ public class GuardAITemplate : MonoBehaviour
         selector = GameObject.FindWithTag("Selector");
         camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         targetLists = GameObject.FindWithTag("TargetLists").GetComponent<AttackTargetLists>();
-        curPos.z = curPos.y;
         targetPos = curPos;
         targetLists.playerTargets.Add(gameObject);
         spriteRender = GetComponent<SpriteRenderer>();
@@ -145,29 +145,30 @@ public class GuardAITemplate : MonoBehaviour
                 {
                     //Debug.Log("moving");
                     curPos = new Vector2(transform.position.x, transform.position.y);
-                    curPos.z = curPos.y;
                     transform.position = Vector2.MoveTowards(curPos, shortcutPath[0], moveSpeed * Time.deltaTime);
                     if (Vector2.Distance((Vector2)curPos, shortcutPath[0]) < 0.02f)
                     {
                         shortcutPath.Remove(shortcutPath[0]);
                         if (shortcutPath.Count < 1) { currentState = GuardState.Passive; }
                     }
+                    Vector3 tempPos = transform.position;
+                    tempPos.z = tempPos.y;
+                    transform.position = tempPos;
                 }
             }
         }
     }
-    void OnMouseDown()
-    {
-        if (!selected)
-        {
-            selector.GetComponent<Selector>().AddObject(this.gameObject);
-        }
-        else
-        {
-
-            selector.GetComponent<Selector>().RemoveObject(this.gameObject);
-        }
-    }
+    //void OnMouseDown()
+    //{
+    //    if (!selected)
+    //    {
+    //        selector.GetComponent<Selector>().AddObject(this.gameObject);
+    //    }
+    //    else
+    //    {
+    //        selector.GetComponent<Selector>().RemoveObject(this.gameObject);
+    //    }
+    //}
     public void MoveToPosition()
     {
         //Debug.Log("moveStarted");
@@ -230,8 +231,8 @@ public class GuardAITemplate : MonoBehaviour
     public void AttackTarget(GameObject target)
     {
         //Debug.Log($"{gameObject.name} Attacks {target.name}");
-        cooldown = attackCooldown;
+        cooldown = attackCooldown / atkSpeedMult;
         target.GetComponent<EnemyAITemplate>().hitPoints -= attackDamage;
-        endlag = attackEndlag;
+        endlag = attackEndlag / atkSpeedMult;
     }
 }
