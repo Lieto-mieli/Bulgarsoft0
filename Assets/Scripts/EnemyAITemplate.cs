@@ -10,14 +10,14 @@ public class EnemyAITemplate : MonoBehaviour
     public float hitPoints;
     public float attackDamage;
     public float attackRange;
-    public float attackCooldown;
-    public float attackEndlag;
+    public float attackCooldown; //setattava limitti
+    public float attackEndlag; //setattava limitti
     AttackTargetLists targetLists;
     bool ignoreTargets;
     Vector3 curPos;
     Vector2 targetPos;
-    float cooldown;
-    float endlag;
+    float cooldown; //hyˆkk‰ys cooldown
+    float endlag; //m‰‰r‰‰ kuinka kauan vihu paikoillaan attack j‰lkeen
     Pathfinder pathfinder;
     List<Vector2> shortcutPath;
     EnemyState currentState;
@@ -51,7 +51,7 @@ public class EnemyAITemplate : MonoBehaviour
         {
             bestSoFar = 9999;
             autoTarget = null;
-            foreach (GameObject target in targetLists.playerTargets)
+            foreach (GameObject target in targetLists.playerTargets) //targettaa l‰hinp‰‰
             {
                 if (target != null && Vector2.Distance(target.transform.position, transform.position) <= attackRange && Vector2.Distance(target.transform.position, transform.position) <= bestSoFar)
                 {

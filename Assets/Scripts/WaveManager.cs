@@ -8,6 +8,9 @@ public class WaveManager : MonoBehaviour
     public float waveIntensity;
     public int waveMagnitude;
     public GameObject Enemy1;
+    public GameObject Enemy2; //<- past here demo
+    public GameObject Enemy3;
+    public GameObject Enemy4; //<-demo end afder dis
     // Start is called before the first frame update
     void Start()
     {
