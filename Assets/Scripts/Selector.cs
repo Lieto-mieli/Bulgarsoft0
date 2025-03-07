@@ -77,7 +77,7 @@ public class Selector : MonoBehaviour
                 maalaa = false;
                 Vector2 currentPos = camera.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 center = (startPos + currentPos) / 2;
-                Vector3 scale = (currentPos - startPos);
+                Vector3 scale = currentPos - startPos;
                 scale.x = Mathf.Abs(scale.x);
                 scale.y = Mathf.Abs(scale.y);
                 scale.z = Mathf.Abs(scale.z);
