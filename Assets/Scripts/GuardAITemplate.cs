@@ -8,6 +8,18 @@ using static UnityEngine.GraphicsBuffer;
 
 public class GuardAITemplate : MonoBehaviour
 {
+    public GuardAITemplate()
+    {
+    }
+    public GuardAITemplate(float moveSpeed, float hitPoints, float attackDamage, float attackRange, float attackCooldown, float attackEndlag)
+    {
+        this.moveSpeed = moveSpeed;
+        this.hitPoints = hitPoints;
+        this.attackDamage = attackDamage;
+        this.attackRange = attackRange;
+        this.attackCooldown = attackCooldown;
+        this.attackEndlag = attackEndlag;
+    }
     public GameObject selector;
     public new Camera camera;
     public AttackTargetLists targetLists;
