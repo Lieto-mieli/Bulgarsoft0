@@ -1,8 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UnitStats : MonoBehaviour
+public class UnitStatsList : MonoBehaviour
 {
-    public static GuardAITemplate guard1 = new(2f,10f,2f,2f,1.2f,0.2f);
+    // moveSpeed, hitPoints, attackDamage, attackRange, attackCooldown, attackEndlag, defence, cost
+    public static float[] guard1 = new float[] { 2f, 10f, 2f, 2f, 1.2f, 0.2f, 0f, 100f };     // 0
+    public static float[] enemy1 = new float[] { 3f, 3f, 1f, 2f, 2.5f, 0.4f, 0f, 0f };      // 1
+    public static float[] fent = new float[] { 0f, 100f, 0f, 0f, 99f, 99f, 1f, 500f };        // 2
+    public static string guard1Image = "playershitteri-removebg";
+    public static string enemy1Image = "FentFiend(1)";
+    public static string fentImage = "Fentanyl";
+    public static List<string> IDList = new() { "guard1", "enemy1", "fent" };
+    public static List<float[]> unitStats = new() { guard1, enemy1, fent };
+    public static List<string> unitImages = new() { guard1Image, enemy1Image, fentImage };
 }
