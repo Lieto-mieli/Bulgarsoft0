@@ -15,13 +15,13 @@ public class EnemyAITemplate : MonoBehaviour
     AttackTargetLists targetLists;
     bool ignoreTargets;
     Vector3 curPos;
-    Vector2 targetPos;
-    float cooldown;
-    float endlag;
+    public Vector2 targetPos;
+    public float cooldown;
+    public float endlag;
     Pathfinder pathfinder;
     List<Vector2> shortcutPath;
     EnemyState currentState;
-    GameObject autoTarget;
+    public GameObject autoTarget;
     float bestSoFar;
     enum EnemyState
     {
@@ -119,7 +119,7 @@ public class EnemyAITemplate : MonoBehaviour
             }
         }
     }
-    public void AttackTarget(GameObject target)
+    public virtual void AttackTarget(GameObject target)
     {
         //Debug.Log($"{gameObject.name} Attacks {target.name}");
         cooldown = attackCooldown;
