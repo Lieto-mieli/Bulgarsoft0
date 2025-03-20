@@ -8,6 +8,7 @@ public class EnemyAITemplate : MonoBehaviour
 {
     public float moveSpeed;
     public float hitPoints;
+    public float maxHp;
     public float attackDamage;
     public float attackRange;
     public float attackCooldown;

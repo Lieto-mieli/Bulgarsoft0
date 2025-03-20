@@ -23,5 +23,6 @@ public class BuyableButton : MonoBehaviour
             scrollMenuScriptObject.GetComponent<BuyableScrollMenu>().infoDisplay.transform.Find("Buy/Text").GetComponent<TextMeshProUGUI>().text =
             $"Train for {UnitStatsList.unitStats[UnitStatsList.IDList.IndexOf(this.name)][7]}$";
         }
+        scrollMenuScriptObject.GetComponent<BuyableScrollMenu>().curSelected = this.name;
     }
 }

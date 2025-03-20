@@ -17,6 +17,8 @@ public class BuyableScrollMenu : MonoBehaviour
     // moveSpeed, hitPoints, attackDamage, attackRange, attackCooldown, attackEndlag, defence
     private float[] statMaximums = new float[] { 3f, 100f, 15f, 8f, 5f, 1f, 3f };
     public GameObject infoDisplay;
+    public ValueTracker valueTracker;
+    public List<GameObject> units;
     void Start()
     {
         nroOfUnits = unitList.Count;
@@ -31,7 +33,6 @@ public class BuyableScrollMenu : MonoBehaviour
             temp.transform.SetParent(this.transform,false);
             temp.transform.position = new Vector2(temp.transform.position.x, temp.transform.position.y-(160*i));
             temp.name = unit;
-            curSelected = unit;
             temp.transform.Find("Name").GetComponent<TextMeshProUGUI>().text = unit;
             temp.transform.Find("Damage/Slider").GetComponent<Slider>().value = UnitStatsList.unitStats[id][2] / statMaximums[2];
             temp.transform.Find("AttackSpeed/Slider").GetComponent<Slider>().value = 1-(((UnitStatsList.unitStats[id][4] / statMaximums[4]) + (UnitStatsList.unitStats[id][5] / statMaximums[5]))/2);
@@ -44,5 +45,18 @@ public class BuyableScrollMenu : MonoBehaviour
             i++;
         }
         exampleButton.SetActive(false);
+    }
+    public void BuyUnit()
+    {
+        if (UnitStatsList.unitStats[UnitStatsList.IDList.IndexOf(curSelected)][7] <= valueTracker.playerCash)
+        {
+            valueTracker.playerCash -= (int)UnitStatsList.unitStats[UnitStatsList.IDList.IndexOf(curSelected)][7];
+            valueTracker.playerUnits.Add(Instantiate(units[UnitStatsList.IDList.IndexOf(curSelected)]));
+            // cash register sound here would be nice?
+        }
+        else
+        {
+            // play error sound here?
+        }
     }
 }

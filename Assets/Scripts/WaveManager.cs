@@ -8,10 +8,11 @@ public class WaveManager : MonoBehaviour
     public float waveIntensity;
     public int waveMagnitude;
     public GameObject Enemy1;
+    public ValueTracker ValueTracker;
     // Start is called before the first frame update
     void Start()
     {
-        
+        waveIntensity = Mathf.Pow(ValueTracker.waveNum, 1.3f);
     }
 
     // Update is called once per frame

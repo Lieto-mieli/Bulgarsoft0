@@ -26,6 +26,7 @@ public class GuardAITemplate : MonoBehaviour
     public bool selected = false;
     public float moveSpeed;
     public float hitPoints;
+    public float maxHp;
     public float attackDamage;
     public float attackRange;
     public float attackCooldown;
