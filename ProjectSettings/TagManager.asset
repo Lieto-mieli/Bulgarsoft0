@@ -11,6 +11,8 @@ TagManager:
   - Terrain
   - Pathfinder
   - Building
+  - Enemy
+  - ValueTracker
   layers:
   - Default
   - TransparentFX

@@ -23,7 +23,11 @@ public class Bullet : MonoBehaviour
         Collider2D hitCollider = Physics2D.OverlapCircle(curPos, 0.1f);
         if(hitCollider != null)
         {
-            Destroy(gameObject);
+            if (hitCollider.CompareTag("Guard"))
+            {
+                hitCollider.gameObject.GetComponent<GuardAITemplate>().hitPoints -= 1;
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class UnitStatsList : MonoBehaviour
 {
     // moveSpeed 0, hitPoints 1, attackDamage 2, attackRange 3, attackCooldown 4, attackEndlag 5, defence 6, cost 7
-    public static float[] guard1 = new float[] { 2f, 10f, 2f, 2f, 1.2f, 0.2f, 0f, 100f };   // 0
-    public static float[] enemy1 = new float[] { 3f, 3f, 1f, 2f, 2.5f, 0.4f, 0f, 0f };      // 1
-    public static float[] fent = new float[] { 0f, 100f, 0f, 0f, 99f, 99f, 1f, 500f };      // 2
+    public static float[] guard1 = new float[] { 2f, 10f, 2f, 2f, 1.2f, 0.2f, 0f, 100f, 0.4f };   // 0
+    public static float[] enemy1 = new float[] { 3f, 3f, 1f, 2f, 2.5f, 0.4f, 0f, 0f, 0.5f };      // 1
+    public static float[] fent = new float[] { 0f, 100f, 0f, 0f, 99f, 99f, 1f, 500f, 1f };      // 2
     public static string guard1Image = "playershitteri-removebg";
     public static string enemy1Image = "FentFiend(1)";
     public static string fentImage = "Fentanyl";

@@ -24,6 +24,7 @@ public class EnemyAiTempRanged : EnemyAITemplate
         attackRange = UnitStatsList.unitStats[1][3];
         attackCooldown = UnitStatsList.unitStats[1][4];
         attackEndlag = UnitStatsList.unitStats[1][5];
+        size = UnitStatsList.unitStats[1][8];
         pathfinder = GameObject.FindWithTag("Pathfinder").GetComponent<Pathfinder>();
         targetLists = GameObject.FindWithTag("TargetLists").GetComponent<AttackTargetLists>();
         targetLists.enemyTargets.Add(gameObject);

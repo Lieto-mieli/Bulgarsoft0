@@ -24,6 +24,7 @@ public class GuardAITemplate : MonoBehaviour
     public GameObject selector;
     public new Camera camera;
     public AttackTargetLists targetLists;
+    public ValueTracker valueTracker;
     public bool selected = false;
     public float moveSpeed;
     public float hitPoints;
@@ -32,6 +33,7 @@ public class GuardAITemplate : MonoBehaviour
     public float attackRange;
     public float attackCooldown;
     public float attackEndlag;
+    public float size;
     bool ignoreTargets;
     public Vector3 curPos;
     public Vector2 targetPos;
@@ -57,6 +59,7 @@ public class GuardAITemplate : MonoBehaviour
         selector = GameObject.FindWithTag("Selector");
         camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         targetLists = GameObject.FindWithTag("TargetLists").GetComponent<AttackTargetLists>();
+        valueTracker = GameObject.FindWithTag("ValueTracker").GetComponent<ValueTracker>();
         targetPos = curPos;
         targetLists.playerTargets.Add(gameObject);
         spriteRender = GetComponent<SpriteRenderer>();
@@ -69,6 +72,7 @@ public class GuardAITemplate : MonoBehaviour
         if (hitPoints <= 0)
         {
             targetLists.playerTargets.Remove(gameObject);
+            valueTracker.playerUnits.Remove(gameObject);
             if (selected)
             {
                 selector.GetComponent<Selector>().currentlySelected.Remove(this.gameObject);
@@ -171,14 +175,31 @@ public class GuardAITemplate : MonoBehaviour
                 }
             }
         }
-        Collider2D[] results = Physics2D.OverlapBoxAll(transform.position, new Vector2(0.5f,0.5f), 0);
+        Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, size, 0);
         foreach(Collider2D c in results)
         {
             if (c.gameObject.CompareTag("Guard") && c.gameObject != this.gameObject)
             {
-                curPos = new Vector2(transform.position.x, transform.position.y);
-                transform.position = Vector3.MoveTowards((Vector2)curPos, (Vector2)c.transform.position, MathF.Min(-1+Vector2.Distance((Vector2)curPos, c.transform.position),0) * Time.deltaTime);
+                //curPos = new Vector2(transform.position.x, transform.position.y);
+                //transform.position = Vector3.MoveTowards((Vector2)curPos, (Vector2)c.transform.position, MathF.Min(-0.5f+Vector2.Distance((Vector2)curPos, c.transform.position),0) * Time.deltaTime);
+                if (moveSpeed != 0) { c.gameObject.GetComponent<GuardAITemplate>().PushAway(transform.position, size); }
+                else if (moveSpeed == 0) { c.gameObject.GetComponent<GuardAITemplate>().PushAway(transform.position, size*3); }
             }
+            if (c.gameObject.CompareTag("Enemy") && c.gameObject != this.gameObject)
+            {
+                //curPos = new Vector2(transform.position.x, transform.position.y);
+                //transform.position = Vector3.MoveTowards((Vector2)curPos, (Vector2)c.transform.position, MathF.Min(-0.5f+Vector2.Distance((Vector2)curPos, c.transform.position),0) * Time.deltaTime);
+                if (moveSpeed != 0) { c.gameObject.GetComponent<EnemyAITemplate>().PushAway(transform.position, size * 3); }
+                else if (moveSpeed == 0) { c.gameObject.GetComponent<EnemyAITemplate>().PushAway(transform.position, size * 3); }
+            }
+        }
+    }
+    public void PushAway(Vector2 awayPos, float pushForce)
+    {
+        if (moveSpeed > 0)
+        {
+            Vector2 curPos = new Vector2(transform.position.x, transform.position.y);
+            transform.position = Vector3.MoveTowards(curPos, awayPos, MathF.Min((-pushForce*1.41f) + Vector2.Distance(curPos, awayPos), 0) * Time.deltaTime);
         }
     }
     //void OnMouseDown()
@@ -198,7 +219,7 @@ public class GuardAITemplate : MonoBehaviour
         ignoreTargets = true;
         //if (selector.GetComponent<Selector>().currentlySelected.Count == 1) 
         //{
-            List<Vector2> path = pathfinder.Pathfind(transform.position, camera.ScreenToWorldPoint(Input.mousePosition));
+            List<Vector2> path = pathfinder.Pathfind(transform.position, camera.ScreenToWorldPoint(Input.mousePosition),size);
             if (path != null)
             {
                 targetPos = camera.ScreenToWorldPoint(Input.mousePosition); 

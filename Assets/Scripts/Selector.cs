@@ -86,12 +86,12 @@ public class Selector : MonoBehaviour
                 GameObject tempBuilding = null;
                 foreach (Collider2D collider in results)
                 {
-                    if (collider.gameObject.CompareTag("Guard"))
+                    if (collider.gameObject.CompareTag("Guard") && collider.gameObject.GetComponent<GuardAITemplate>().moveSpeed > 0)
                     {
                         AddObject(collider.gameObject);
                         tempGuardCount++;
                     }
-                    if (collider.gameObject.CompareTag("Building"))
+                    if (collider.gameObject.CompareTag("Guard") && collider.gameObject.GetComponent<GuardAITemplate>().moveSpeed == 0)
                     {
                         if (tempBuilding == null)
                         {

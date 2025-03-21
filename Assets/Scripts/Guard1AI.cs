@@ -14,6 +14,7 @@ public class Guard1AI : GuardAITemplate
         attackRange = UnitStatsList.unitStats[0][3];
         attackCooldown = UnitStatsList.unitStats[0][4];
         attackEndlag = UnitStatsList.unitStats[0][5];
+        size = UnitStatsList.unitStats[0][8];
         //;
         selector = GameObject.FindWithTag("Selector");
         camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();

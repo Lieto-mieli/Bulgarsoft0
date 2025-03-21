@@ -146,6 +146,7 @@ MonoBehaviour:
   selector: {fileID: 0}
   camera: {fileID: 0}
   targetLists: {fileID: 0}
+  valueTracker: {fileID: 0}
   selected: 0
   moveSpeed: 2
   hitPoints: 10
@@ -154,6 +155,7 @@ MonoBehaviour:
   attackRange: 2
   attackCooldown: 1.2
   attackEndlag: 0.2
+  size: 0
   curPos: {x: 0, y: 0, z: 0}
   targetPos: {x: 0, y: 0}
   spriteRender: {fileID: 0}

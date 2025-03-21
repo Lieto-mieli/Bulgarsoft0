@@ -64,7 +64,7 @@ public class Pathfinder : MonoBehaviour
         }
         //DEBUGTOOL)
     }
-    public List<Vector2> ShortcutPath(List<PathNode> input, Vector2 origin, Vector2 destination)
+    public List<Vector2> ShortcutPath(List<PathNode> input, Vector2 origin, Vector2 destination, float size)
     {
         //bool removeFirst = true;
         List<Vector2> output = new List<Vector2>() {origin};
@@ -72,7 +72,7 @@ public class Pathfinder : MonoBehaviour
         Vector2 curChoice = Vector2.zero;
         while (inputArray < input.Count)
         {
-            if (LoSCheck.NewLineCheck(output[output.Count - 1], new Vector2(input[inputArray].x, input[inputArray].y), new List<string>{ "Terrain" }))
+            if (LoSCheck.NewLineCheck(output[output.Count - 1], new Vector2(input[inputArray].x, input[inputArray].y), new List<string>{ "Terrain" }, size))
             {
                 if (inputArray == 0)
                 {
@@ -97,7 +97,7 @@ public class Pathfinder : MonoBehaviour
         output.Remove(origin);
         return output;
     }
-    public List<Vector2> Pathfind(Vector2 position, Vector2 destination)
+    public List<Vector2> Pathfind(Vector2 position, Vector2 destination, float size)
     {
         Vector2 trueOrigin = new Vector2(Convert.ToInt32(position.x), Convert.ToInt32(position.y));
         Vector2 mouseWorldPosition = destination;
@@ -111,7 +111,7 @@ public class Pathfinder : MonoBehaviour
             //    Debug.DrawLine(new Vector3(path[i].x, path[i].y), new Vector3(path[i + 1].x, path[i + 1].y), Color.green, 5f, false);
             //}
             mouseWorldPosition += new Vector2(-0.5f, -0.5f);
-            shortcutPath = ShortcutPath(path, trueOrigin, mouseWorldPosition);
+            shortcutPath = ShortcutPath(path, trueOrigin, mouseWorldPosition, size);
             //foreach(Vector2 pos in shortcutPath)
             //{
             //    Debug.Log($"({pos.x}, {pos.y})");

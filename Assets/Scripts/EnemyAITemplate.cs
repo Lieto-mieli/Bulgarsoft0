@@ -13,6 +13,7 @@ public class EnemyAITemplate : MonoBehaviour
     public float attackRange;
     public float attackCooldown;
     public float attackEndlag;
+    public float size;
     public AttackTargetLists targetLists;
     bool ignoreTargets;
     Vector3 curPos;
@@ -104,13 +105,39 @@ public class EnemyAITemplate : MonoBehaviour
                 }
             }
         }
+        Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, size, 0);
+        foreach (Collider2D c in results)
+        {
+            if (c.gameObject.CompareTag("Enemy") && c.gameObject != this.gameObject)
+            {
+                //curPos = new Vector2(transform.position.x, transform.position.y);
+                //transform.position = Vector3.MoveTowards((Vector2)curPos, (Vector2)c.transform.position, MathF.Min(-0.5f+Vector2.Distance((Vector2)curPos, c.transform.position),0) * Time.deltaTime);
+                if (moveSpeed != 0) { c.gameObject.GetComponent<EnemyAITemplate>().PushAway(transform.position, size); }
+                else if (moveSpeed == 0) { c.gameObject.GetComponent<EnemyAITemplate>().PushAway(transform.position, size * 3); }
+            }
+            if (c.gameObject.CompareTag("Guard") && c.gameObject != this.gameObject)
+            {
+                //curPos = new Vector2(transform.position.x, transform.position.y);
+                //transform.position = Vector3.MoveTowards((Vector2)curPos, (Vector2)c.transform.position, MathF.Min(-0.5f+Vector2.Distance((Vector2)curPos, c.transform.position),0) * Time.deltaTime);
+                if (moveSpeed != 0) { c.gameObject.GetComponent<GuardAITemplate>().PushAway(transform.position, size * 3); }
+                else if (moveSpeed == 0) { c.gameObject.GetComponent<GuardAITemplate>().PushAway(transform.position, size * 3); }
+            }
+        }
+    }
+    public void PushAway(Vector2 awayPos, float pushForce)
+    {
+        if (moveSpeed > 0)
+        {
+            Vector2 curPos = new Vector2(transform.position.x, transform.position.y);
+            transform.position = Vector3.MoveTowards(curPos, awayPos, MathF.Min((-pushForce * 1.41f) + Vector2.Distance(curPos, awayPos), 0) * Time.deltaTime);
+        }
     }
     public void MoveToPosition(Vector2 pos)
     {
         //Debug.Log("moveStarted");
         if (true)
         {
-            List<Vector2> path = pathfinder.Pathfind(transform.position, pos);
+            List<Vector2> path = pathfinder.Pathfind(transform.position, pos, size);
             if (path != null)
             {
                 targetPos = pos;

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4436097998346993053}
   m_Layer: 0
   m_Name: Fent
-  m_TagString: Building
+  m_TagString: Guard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,10 +104,12 @@ MonoBehaviour:
   selected: 0
   moveSpeed: 0
   hitPoints: 0
+  maxHp: 0
   attackDamage: 0
   attackRange: 0
   attackCooldown: 0
   attackEndlag: 0
+  size: 0
   curPos: {x: 0, y: 0, z: 0}
   targetPos: {x: 0, y: 0}
   spriteRender: {fileID: 0}

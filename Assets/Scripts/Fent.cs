@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -15,7 +16,10 @@ public class Fent : GuardAITemplate
     void Start()
     {
         ability1Active = false;
-        hitPoints = 100;
+        moveSpeed = UnitStatsList.unitStats[2][0];
+        hitPoints = UnitStatsList.unitStats[2][1];
+        maxHp = UnitStatsList.unitStats[2][1];
+        size = UnitStatsList.unitStats[2][8];
         selected = false;
         selector = GameObject.FindWithTag("Selector");
         targetLists = GameObject.FindWithTag("TargetLists").GetComponent<AttackTargetLists>();
@@ -24,7 +28,6 @@ public class Fent : GuardAITemplate
         tempPos.z = tempPos.y;
         transform.position = tempPos;
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -59,6 +62,17 @@ public class Fent : GuardAITemplate
                         guard.GetComponent<GuardAITemplate>().atkSpeedMult = 1.3f;
                     }
                 }
+            }
+        }
+        Collider2D[] results = Physics2D.OverlapBoxAll(transform.position, new Vector2(size, size), 0);
+        foreach (Collider2D c in results)
+        {
+            if (c.gameObject.CompareTag("Guard") && c.gameObject != this.gameObject)
+            {
+                //curPos = new Vector2(transform.position.x, transform.position.y);
+                //transform.position = Vector3.MoveTowards((Vector2)curPos, (Vector2)c.transform.position, MathF.Min(-0.5f+Vector2.Distance((Vector2)curPos, c.transform.position),0) * Time.deltaTime);
+                if (moveSpeed != 0) { c.gameObject.GetComponent<GuardAITemplate>().PushAway(transform.position, size); }
+                else if (moveSpeed == 0) { c.gameObject.GetComponent<GuardAITemplate>().PushAway(transform.position, size * 3); }
             }
         }
     }

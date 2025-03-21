@@ -10,13 +10,14 @@ public class LineofSightCheck : MonoBehaviour
     //private PolygonCollider2D polyCollider;
     private List<string> tagsToCheck;
     private bool tagCheck;
+    private
 
     // Start is called before the first frame update
     void Start()
     {
         line = GetComponent<LineRenderer>();
         //polyCollider = GetComponent<PolygonCollider2D>();
-        NewLineCheck(line.GetPosition(0), line.GetPosition(1), new List<string> { "Terrain" });
+       // NewLineCheck(line.GetPosition(0), line.GetPosition(1), new List<string> { "Terrain" });
     }
 
     // Update is called once per frame
@@ -24,14 +25,14 @@ public class LineofSightCheck : MonoBehaviour
     {
         //Debug.Log(Physics2D.IsTouching(polyCollider, GameObject.FindGameObjectWithTag("Terrain").GetComponent<Collider2D>()));
     }
-    public bool NewLineCheck(Vector2 startPos, Vector2 endPos, List<string> checkedTags)
+    public bool NewLineCheck(Vector2 startPos, Vector2 endPos, List<string> checkedTags, float size)
     {
         tagCheck = false;
         tagsToCheck = checkedTags;
         line.SetPositions(new Vector3[] { startPos, endPos });
         Vector3[] temp = new Vector3[2];
         line.GetPositions(temp);
-        List<Vector2> colliderPoints = CalculateColliderPoints(temp);
+        List<Vector2> colliderPoints = CalculateColliderPoints(temp, size);
         //polyCollider.SetPath(0, colliderPoints.ConvertAll(p => (Vector2)transform.InverseTransformPoint(p)));
         //Physics2D.simulationMode = SimulationMode2D.Script;
         //Physics2D.Simulate(0.02f);
@@ -55,7 +56,7 @@ public class LineofSightCheck : MonoBehaviour
         //Debug.Log(tagCheck);
         return tagCheck;
     }
-    public List<Vector2> CalculateColliderPoints(Vector3[] linePoints)
+    public List<Vector2> CalculateColliderPoints(Vector3[] linePoints, float size)
     {
         Vector3[] positions = linePoints;
         //foreach (Vector2 position in positions)
@@ -65,7 +66,7 @@ public class LineofSightCheck : MonoBehaviour
         Vector3 direction = positions[1] - positions[0];
         Vector3 right = new Vector3(direction.y, -direction.x, 0).normalized;
         Vector3 left = new Vector3(-direction.y, direction.x, 0).normalized;
-        float width = line.startWidth*0.5f;
+        float width = size;
         List<Vector2> raycastPoints = new List<Vector2>
         {
             positions[0] + left * width,
