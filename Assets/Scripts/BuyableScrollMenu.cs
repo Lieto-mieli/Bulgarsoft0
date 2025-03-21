@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Linq;
 public class BuyableScrollMenu : MonoBehaviour
 {
     public string curSelected;
@@ -47,11 +47,12 @@ public class BuyableScrollMenu : MonoBehaviour
         exampleButton.SetActive(false);
     }
     public void BuyUnit()
-    {
+    { 
         if (UnitStatsList.unitStats[UnitStatsList.IDList.IndexOf(curSelected)][7] <= valueTracker.playerCash)
         {
             valueTracker.playerCash -= (int)UnitStatsList.unitStats[UnitStatsList.IDList.IndexOf(curSelected)][7];
             valueTracker.playerUnits.Add(Instantiate(units[UnitStatsList.IDList.IndexOf(curSelected)]));
+            valueTracker.playerUnits.Last().transform.SetParent(valueTracker.gameplaySum.transform,true);
             // cash register sound here would be nice?
         }
         else

@@ -143,9 +143,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2822919761f683d46b802168c228ebc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selector: {fileID: 0}
+  camera: {fileID: 0}
+  targetLists: {fileID: 0}
+  selected: 0
   moveSpeed: 2
   hitPoints: 10
+  maxHp: 0
   attackDamage: 2
   attackRange: 2
   attackCooldown: 1.2
   attackEndlag: 0.2
+  curPos: {x: 0, y: 0, z: 0}
+  targetPos: {x: 0, y: 0}
+  spriteRender: {fileID: 0}
+  pathfinder: {fileID: 0}
+  atkSpeedMult: 1

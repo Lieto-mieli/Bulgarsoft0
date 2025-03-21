@@ -7,12 +7,13 @@ public class Guard1AI : GuardAITemplate
     void Start()
     {
         //Guard1Stats
-        moveSpeed = 2;
-        hitPoints = 10;
-        attackDamage = 2;
-        attackRange = 2;
-        attackCooldown = 1.2f;
-        attackEndlag = 0.2f;
+        moveSpeed = UnitStatsList.unitStats[0][0];
+        hitPoints = UnitStatsList.unitStats[0][1];
+        maxHp = UnitStatsList.unitStats[0][1];
+        attackDamage = UnitStatsList.unitStats[0][2];
+        attackRange = UnitStatsList.unitStats[0][3];
+        attackCooldown = UnitStatsList.unitStats[0][4];
+        attackEndlag = UnitStatsList.unitStats[0][5];
         //;
         selector = GameObject.FindWithTag("Selector");
         camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
 using static UnityEngine.GraphicsBuffer;
 
@@ -140,17 +141,13 @@ public class GuardAITemplate : MonoBehaviour
                     //Debug.Log("move");
                 }
             }
-            if ((Vector2.Distance((Vector2)curPos, targetPos) < 0.01f && cooldown <= 0 ) || (!ignoreTargets && cooldown <= 0))
+            if (manualTarget != null && !ignoreTargets && cooldown <= 0)
             {
-                ignoreTargets = false;
-                if (manualTarget != null)
-                {
-                    AttackTarget(manualTarget);
-                }
-                else if (autoTarget != null)
-                {
-                    AttackTarget(autoTarget);
-                }
+                AttackTarget(manualTarget);
+            }
+            else if (autoTarget != null && !ignoreTargets && cooldown <= 0)
+            {
+                AttackTarget(autoTarget);
             }
             else
             {
@@ -162,12 +159,25 @@ public class GuardAITemplate : MonoBehaviour
                     if (Vector2.Distance((Vector2)curPos, shortcutPath[0]) < 0.02f)
                     {
                         shortcutPath.Remove(shortcutPath[0]);
-                        if (shortcutPath.Count < 1) { currentState = GuardState.Passive; }
+                        if (shortcutPath.Count < 1) 
+                        { 
+                            currentState = GuardState.Passive;
+                            ignoreTargets = false;
+                        }
                     }
                     Vector3 tempPos = transform.position;
                     tempPos.z = tempPos.y;
                     transform.position = tempPos;
                 }
+            }
+        }
+        Collider2D[] results = Physics2D.OverlapBoxAll(transform.position, new Vector2(0.5f,0.5f), 0);
+        foreach(Collider2D c in results)
+        {
+            if (c.gameObject.CompareTag("Guard") && c.gameObject != this.gameObject)
+            {
+                curPos = new Vector2(transform.position.x, transform.position.y);
+                transform.position = Vector3.MoveTowards((Vector2)curPos, (Vector2)c.transform.position, MathF.Min(-1+Vector2.Distance((Vector2)curPos, c.transform.position),0) * Time.deltaTime);
             }
         }
     }
@@ -186,8 +196,8 @@ public class GuardAITemplate : MonoBehaviour
     {
         //Debug.Log("moveStarted");
         ignoreTargets = true;
-        if (selector.GetComponent<Selector>().currentlySelected.Count == 1) 
-        {
+        //if (selector.GetComponent<Selector>().currentlySelected.Count == 1) 
+        //{
             List<Vector2> path = pathfinder.Pathfind(transform.position, camera.ScreenToWorldPoint(Input.mousePosition));
             if (path != null)
             {
@@ -196,50 +206,50 @@ public class GuardAITemplate : MonoBehaviour
                 shortcutPath = path;
                 currentState = GuardState.MovingToPosition;
             }
-        }
-        else
-        {
-            int array = selector.GetComponent<Selector>().currentlySelected.IndexOf(gameObject);
-            int Count = Convert.ToInt16(selector.GetComponent<Selector>().currentlySelected.Count);
-            int sqrtInt = Convert.ToInt16(math.sqrt(Count));
-            float overflow = math.sqrt(Count) - sqrtInt;
-            int totalSize;
-            int collumns = 1;
-            int rows = 1;
-            if (overflow > 0)
-            { 
-                totalSize = sqrtInt + 1; 
-                if (overflow < 0.5)
-                {
-                    collumns = sqrtInt;
-                    rows = sqrtInt+1;
-                }
-                else
-                {
-                    collumns = sqrtInt+1;
-                    rows = sqrtInt+1;
-                }
-            }
-            else 
-            { 
-                totalSize = sqrtInt;
-                collumns = sqrtInt;
-                rows = sqrtInt;
-            }
-            int row = Convert.ToInt16(array / collumns)*collumns;
-            int collumn = Convert.ToInt16((array / rows)-0.000001);
-            float maxSizeX = MathF.Max((4 * math.log(collumns)-1)/1.5f,0);
-            float maxSizeY = MathF.Max((4 * math.log(rows)-1)/1.5f,0);
+        //}
+        //else
+        //{
+            //int array = selector.GetComponent<Selector>().currentlySelected.IndexOf(gameObject)+1;
+            //int Count = Convert.ToInt16(selector.GetComponent<Selector>().currentlySelected.Count);
+            //int sqrtInt = Convert.ToInt16(math.sqrt(Count));
+            //float overflow = math.sqrt(Count) - sqrtInt;
+            //int totalSize;
+            //int collumns = 1;
+            //int rows = 1;
+            //if (overflow > 0)
+            //{ 
+            //    totalSize = sqrtInt + 1; 
+            //    if (overflow < 0.5)
+            //    {
+            //        collumns = sqrtInt;
+            //        rows = sqrtInt+1;
+            //    }
+            //    else
+            //    {
+            //        collumns = sqrtInt+1;
+            //        rows = sqrtInt+1;
+            //    }
+            //}
+            //else 
+            //{ 
+            //    totalSize = sqrtInt;
+            //    collumns = sqrtInt;
+            //    rows = sqrtInt;
+            //}
+            //int row = Convert.ToInt16(array / collumns);
+            //int collumn = Convert.ToInt16((array / rows)-0.000001);
+            //float maxSizeX = MathF.Max((4 * math.log(collumns)-1)/1.5f,0);
+            //float maxSizeY = MathF.Max((4 * math.log(rows)-1)/1.5f,0);
             //Debug.Log($"({collumns}, {rows}, {collumn}, {row}, {maxSizeX}, {maxSizeY})");
-            List<Vector2> path = pathfinder.Pathfind(transform.position, camera.ScreenToWorldPoint(Input.mousePosition));
-            if (path != null)
-            {
-                targetPos = new Vector2(path[path.Count - 1].x + ((maxSizeX * (collumn / MathF.Max(collumns - 1, 1))) - maxSizeX * 0.5f), path[path.Count - 1].y + (maxSizeY * (row / MathF.Max(rows - 1, 1))) - maxSizeY * 0.5f);
-                path.Add(targetPos);
-                shortcutPath = path;
-                currentState = GuardState.MovingToPosition;
-            }
-        }
+            //List<Vector2> path = pathfinder.Pathfind(transform.position, camera.ScreenToWorldPoint(Input.mousePosition));
+            //if (path != null)
+            //{
+                //targetPos = new Vector2(path[path.Count - 1].x + ((maxSizeX * (collumn / MathF.Max(collumns - 1, 1))) - maxSizeX * 0.5f), path[path.Count - 1].y + (maxSizeY * (row / MathF.Max(rows - 1, 1))) - maxSizeY * 0.5f);
+                //path.Add(targetPos);
+            //    shortcutPath = path;
+            //    currentState = GuardState.MovingToPosition;
+            //}
+        //}
     }
     public void AttackTarget(GameObject target)
     {

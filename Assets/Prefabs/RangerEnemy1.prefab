@@ -98,13 +98,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  hitPoints: 3
+  hitPoints: 1
+  maxHp: 0
   attackDamage: 1
   attackRange: 2
   attackCooldown: 2.5
   attackEndlag: 0.4
+  targetLists: {fileID: 0}
   targetPos: {x: 0, y: 0}
   cooldown: 0
   endlag: 0
+  pathfinder: {fileID: 0}
   autoTarget: {fileID: 0}
   projectile: {fileID: 2066352878470194815, guid: 120b53b8f16a27546b0a653d0bc6fea3, type: 3}

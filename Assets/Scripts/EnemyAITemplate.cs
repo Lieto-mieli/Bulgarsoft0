@@ -13,13 +13,13 @@ public class EnemyAITemplate : MonoBehaviour
     public float attackRange;
     public float attackCooldown;
     public float attackEndlag;
-    AttackTargetLists targetLists;
+    public AttackTargetLists targetLists;
     bool ignoreTargets;
     Vector3 curPos;
     public Vector2 targetPos;
     public float cooldown;
     public float endlag;
-    Pathfinder pathfinder;
+    public Pathfinder pathfinder;
     List<Vector2> shortcutPath;
     EnemyState currentState;
     public GameObject autoTarget;
