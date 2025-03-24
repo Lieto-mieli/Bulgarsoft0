@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 public class BuyableScrollMenu : MonoBehaviour
 {
     public string curSelected;
@@ -19,6 +20,7 @@ public class BuyableScrollMenu : MonoBehaviour
     public GameObject infoDisplay;
     public ValueTracker valueTracker;
     public List<GameObject> units;
+    public Canvas canvas;
     void Start()
     {
         nroOfUnits = unitList.Count;
@@ -30,8 +32,9 @@ public class BuyableScrollMenu : MonoBehaviour
             int id = UnitStatsList.IDList.IndexOf(unit);
             selectButtonList.Add(Instantiate(exampleButton));
             GameObject temp = selectButtonList[selectButtonList.Count - 1];
-            temp.transform.SetParent(this.transform,false);
-            temp.transform.position = new Vector2(temp.transform.position.x, temp.transform.position.y-(160*i));
+            temp.transform.SetParent(this.transform, false);
+            float canvasScale = canvas.gameObject.transform.lossyScale.y;
+            temp.transform.position = new Vector2(temp.transform.position.x, ((temp.transform.position.y-(160*i))));
             temp.name = unit;
             temp.transform.Find("Name").GetComponent<TextMeshProUGUI>().text = unit;
             temp.transform.Find("Damage/Slider").GetComponent<Slider>().value = UnitStatsList.unitStats[id][2] / statMaximums[2];

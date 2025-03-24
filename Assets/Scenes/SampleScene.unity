@@ -2449,6 +2449,7 @@ MonoBehaviour:
   - {fileID: 3232812135763961454, guid: 7dde23515e7e5454b83049dd157422f1, type: 3}
   - {fileID: 2207830864905410726, guid: 691bf0994e1044c4f9ff1b0a59692dff, type: 3}
   - {fileID: 3227800381251423106, guid: 19b1d660410968f419b81666d8d07f67, type: 3}
+  canvas: {fileID: 1808046830}
 --- !u!1 &588495272
 GameObject:
   m_ObjectHideFlags: 0
@@ -7228,7 +7229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
+  m_ScaleFactor: 0.383333
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0

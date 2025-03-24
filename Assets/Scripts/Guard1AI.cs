@@ -19,6 +19,7 @@ public class Guard1AI : GuardAITemplate
         selector = GameObject.FindWithTag("Selector");
         camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         targetLists = GameObject.FindWithTag("TargetLists").GetComponent<AttackTargetLists>();
+        valueTracker = GameObject.FindWithTag("ValueTracker").GetComponent<ValueTracker>();
         curPos.z = curPos.y;
         targetPos = curPos;
         targetLists.playerTargets.Add(gameObject);

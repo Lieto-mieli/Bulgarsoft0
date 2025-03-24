@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
 using Unity.Mathematics;
 using System.IO;
@@ -35,7 +34,7 @@ public class ValueTracker : MonoBehaviour
         waveManager.NewWave();
         foreach (GameObject unit in playerUnits)
         {
-            unit.transform.position = new Vector2(13, 5);
+            unit.transform.position = new Vector2(UnityEngine.Random.Range(12.5f, 13.5f), UnityEngine.Random.Range(4.5f, 5.5f));
         }
     }
     public void EndWave()

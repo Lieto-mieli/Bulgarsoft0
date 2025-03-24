@@ -67,7 +67,7 @@ public class Fent : GuardAITemplate
         Collider2D[] results = Physics2D.OverlapBoxAll(transform.position, new Vector2(size, size), 0);
         foreach (Collider2D c in results)
         {
-            Debug.Log("guardshittis");
+            //Debug.Log("guardshittis");
             if (c.gameObject.CompareTag("Guard") && c.gameObject != this.gameObject)
             {
                 //curPos = new Vector2(transform.position.x, transform.position.y);
@@ -75,7 +75,7 @@ public class Fent : GuardAITemplate
                 if (moveSpeed != 0) { c.gameObject.GetComponent<GuardAITemplate>().PushAway(transform.position, size); }
                 else if (moveSpeed == 0) { c.gameObject.GetComponent<GuardAITemplate>().PushAway(transform.position, size * 3); }
             }
-            if (c.gameObject.CompareTag("Enemy") && c.gameObject != this.gameObject)
+            if (c.gameObject.CompareTag("Enemy"))
             {
                 //curPos = new Vector2(transform.position.x, transform.position.y);
                 //transform.position = Vector3.MoveTowards((Vector2)curPos, (Vector2)c.transform.position, MathF.Min(-0.5f+Vector2.Distance((Vector2)curPos, c.transform.position),0) * Time.deltaTime);
