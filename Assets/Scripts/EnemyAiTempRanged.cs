@@ -7,7 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyAiTempRanged : EnemyAITemplate
 {
-
+    int magSize;
     public GameObject projectile;
     enum EnemyState
     {
@@ -28,15 +28,27 @@ public class EnemyAiTempRanged : EnemyAITemplate
         pathfinder = GameObject.FindWithTag("Pathfinder").GetComponent<Pathfinder>();
         targetLists = GameObject.FindWithTag("TargetLists").GetComponent<AttackTargetLists>();
         targetLists.enemyTargets.Add(gameObject);
+        magSize = 10;
     }
     //Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 1), Quaternion.identity);
     public override void AttackTarget(GameObject target)
     {
-        //Debug.Log($"{gameObject.name} Attacks {target.name}");
-        base.cooldown = base.attackCooldown;
-        GameObject tempBullet = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 1), Quaternion.identity);
-        tempBullet.GetComponent<Bullet>().TarPos = base.autoTarget.transform.position;
-        //target.GetComponent<GuardAITemplate>().hitPoints -= attackDamage;
-        base.endlag = base.attackEndlag;
+        Debug.Log(magSize);
+        if (magSize <= 0)
+        {
+            //reload
+            magSize = 10;
+            Debug.Log("RELOADING");
+        }
+        else if (magSize <= 1)
+        {
+            magSize --;
+            //Debug.Log($"{gameObject.name} Attacks {target.name}");
+            base.cooldown = base.attackCooldown;
+            GameObject tempBullet = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 1), Quaternion.identity);
+            tempBullet.GetComponent<Bullet>().TarPos = base.autoTarget.transform.position;
+            //target.GetComponent<GuardAITemplate>().hitPoints -= attackDamage;
+            base.endlag = base.attackEndlag;
+        }
     }
 }
