@@ -178,7 +178,7 @@ public class GuardAITemplate : MonoBehaviour
         Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, size, 0);
         foreach(Collider2D c in results)
         {
-            Debug.Log("guardshittis");
+            //Debug.Log("guardshittis");
             if (c.gameObject.CompareTag("Guard") && c.gameObject != this.gameObject)
             {
                 //curPos = new Vector2(transform.position.x, transform.position.y);
