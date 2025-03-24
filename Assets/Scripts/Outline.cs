@@ -17,7 +17,7 @@ public class Outline : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!selectList.GetComponent<Selector>().currentlySelected.Contains(guardToFollow))
+        if (!selectList.GetComponent<Selector>().currentlySelected.Contains(guardToFollow)||selectList.GetComponent<Selector>().currentlySelected.Count == 0)
         {
             Destroy(gameObject);
         }

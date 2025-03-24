@@ -17,14 +17,14 @@ public class EnemyAiTempRanged : EnemyAITemplate
     }
     void Start()
     {
-        moveSpeed = UnitStatsList.unitStats[4][0];
-        hitPoints = UnitStatsList.unitStats[4][1];
-        maxHp = UnitStatsList.unitStats[4][1];
-        attackDamage = UnitStatsList.unitStats[4][2];
-        attackRange = UnitStatsList.unitStats[4][3];
-        attackCooldown = UnitStatsList.unitStats[4][4];
-        attackEndlag = UnitStatsList.unitStats[4][5];
-        size = UnitStatsList.unitStats[4][8];
+        moveSpeed = UnitStatsList.unitStats[3][0];
+        hitPoints = UnitStatsList.unitStats[3][1];
+        maxHp = UnitStatsList.unitStats[3][1];
+        attackDamage = UnitStatsList.unitStats[3][2];
+        attackRange = UnitStatsList.unitStats[3][3];
+        attackCooldown = UnitStatsList.unitStats[3][4];
+        attackEndlag = UnitStatsList.unitStats[3][5];
+        size = UnitStatsList.unitStats[3][8];
         pathfinder = GameObject.FindWithTag("Pathfinder").GetComponent<Pathfinder>();
         targetLists = GameObject.FindWithTag("TargetLists").GetComponent<AttackTargetLists>();
         targetLists.enemyTargets.Add(gameObject);

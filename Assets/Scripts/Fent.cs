@@ -57,7 +57,11 @@ public class Fent : GuardAITemplate
             {
                 foreach (GameObject guard in ability1Targets)
                 {
-                    if (guard.GetComponent<GuardAITemplate>().atkSpeedMult != 1.3f)
+                    if (guard == null)
+                    {
+                        ability1Targets.Remove(guard);
+                    }
+                    else if (guard.GetComponent<GuardAITemplate>().atkSpeedMult != 1.3f)
                     {
                         guard.GetComponent<GuardAITemplate>().atkSpeedMult = 1.3f;
                     }
