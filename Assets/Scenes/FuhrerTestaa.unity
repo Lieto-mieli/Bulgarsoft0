@@ -1739,13 +1739,16 @@ MonoBehaviour:
   selector: {fileID: 0}
   camera: {fileID: 0}
   targetLists: {fileID: 0}
+  valueTracker: {fileID: 0}
   selected: 0
   moveSpeed: 0
   hitPoints: 0
+  maxHp: 0
   attackDamage: 0
   attackRange: 0
   attackCooldown: 0
   attackEndlag: 0
+  size: 0
   curPos: {x: 0, y: 0, z: 0}
   targetPos: {x: 0, y: 0}
   spriteRender: {fileID: 0}
@@ -4153,6 +4156,8 @@ MonoBehaviour:
   waveIntensity: 1
   waveMagnitude: 3
   Enemy1: {fileID: 2207830864905410726, guid: 691bf0994e1044c4f9ff1b0a59692dff, type: 3}
+  valueTracker: {fileID: 0}
+  targetLists: {fileID: 0}
 --- !u!4 &2105494659
 Transform:
   m_ObjectHideFlags: 0

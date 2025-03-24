@@ -17,14 +17,14 @@ public class EnemyAiTempRanged : EnemyAITemplate
     }
     void Start()
     {
-        moveSpeed = UnitStatsList.unitStats[1][0];
-        hitPoints = UnitStatsList.unitStats[1][1];
-        maxHp = UnitStatsList.unitStats[1][1];
-        attackDamage = UnitStatsList.unitStats[1][2];
-        attackRange = UnitStatsList.unitStats[1][3];
-        attackCooldown = UnitStatsList.unitStats[1][4];
-        attackEndlag = UnitStatsList.unitStats[1][5];
-        size = UnitStatsList.unitStats[1][8];
+        moveSpeed = UnitStatsList.unitStats[4][0];
+        hitPoints = UnitStatsList.unitStats[4][1];
+        maxHp = UnitStatsList.unitStats[4][1];
+        attackDamage = UnitStatsList.unitStats[4][2];
+        attackRange = UnitStatsList.unitStats[4][3];
+        attackCooldown = UnitStatsList.unitStats[4][4];
+        attackEndlag = UnitStatsList.unitStats[4][5];
+        size = UnitStatsList.unitStats[4][8];
         pathfinder = GameObject.FindWithTag("Pathfinder").GetComponent<Pathfinder>();
         targetLists = GameObject.FindWithTag("TargetLists").GetComponent<AttackTargetLists>();
         targetLists.enemyTargets.Add(gameObject);
@@ -40,7 +40,7 @@ public class EnemyAiTempRanged : EnemyAITemplate
             magSize = 10;
             Debug.Log("RELOADING");
         }
-        else if (magSize <= 1)
+        else if (magSize >= 1)
         {
             magSize --;
             //Debug.Log($"{gameObject.name} Attacks {target.name}");
