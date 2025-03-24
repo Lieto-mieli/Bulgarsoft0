@@ -18,7 +18,7 @@ public class ValueTracker : MonoBehaviour
     void Start()
     {
         waveNum = 1;
-        playerCash = 100;
+        playerCash = 10000;
     }
     void Update()
     {
@@ -44,7 +44,10 @@ public class ValueTracker : MonoBehaviour
         buymenuSum.SetActive(true);
         foreach (GameObject unit in playerUnits)
         {
-            unit.GetComponent<GuardAITemplate>().hitPoints = Mathf.Min(unit.GetComponent<GuardAITemplate>().maxHp, unit.GetComponent<GuardAITemplate>().hitPoints += (unit.GetComponent<GuardAITemplate>().maxHp * 0.2f));
+            GuardAITemplate u = unit.GetComponent<GuardAITemplate>();
+            u.hitPoints = Mathf.Min(u.maxHp, u.hitPoints += (u.maxHp * 0.2f));
+            u.currentState = GuardAITemplate.GuardState.Passive;
+            u.ignoreTargets = false;
         }
         waveNum++;
     }

@@ -192,31 +192,31 @@ public class Selector : MonoBehaviour
             GameObject outline = Instantiate(guardOutlineList[0], guard.transform.position, new Quaternion());
             outline.GetComponent<Outline>().guardToFollow = guard;
         }
-        UpdateCameraPortraits();
+        //UpdateCameraPortraits();
     }
     public void RemoveObject(GameObject guard)
     {
         currentlySelected.Remove(guard);
-        UpdateCameraPortraits();
+        //UpdateCameraPortraits();
     }
     public void SelectBuilding(GameObject building)
     {
         //Debug.Log("ben");
         ClearSelect();
         buildingSelected = building;
-        UpdateCameraPortraits();
+        //UpdateCameraPortraits();
     }
     public void DeselectBuilding()
     {
         //Debug.Log("ben");
         buildingSelected = null;
-        UpdateCameraPortraits();
+        //UpdateCameraPortraits();
     }
     public void ClearSelect()
     {
         currentlySelected.Clear();
     }
-    public void UpdateCameraPortraits()
+    public void UpdateCameraPortraits() // too resource intensive, most likely cut from game
     {
         buildingMenu.SetActive(false);
         buildingCamera.SetActive(false);

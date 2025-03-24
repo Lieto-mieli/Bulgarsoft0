@@ -34,7 +34,7 @@ public class GuardAITemplate : MonoBehaviour
     public float attackCooldown;
     public float attackEndlag;
     public float size;
-    bool ignoreTargets;
+    public bool ignoreTargets;
     public Vector3 curPos;
     public Vector2 targetPos;
     float cooldown;
@@ -45,9 +45,9 @@ public class GuardAITemplate : MonoBehaviour
     public SpriteRenderer spriteRender;
     public Pathfinder pathfinder;
     List<Vector2> shortcutPath;
-    GuardState currentState;
+    public GuardState currentState;
     public float atkSpeedMult = 1;
-    enum GuardState
+    public enum GuardState
     {
         Passive,
         MovingToPosition,
