@@ -33,7 +33,7 @@ public class EnemyAiTempRanged : EnemyAITemplate
     //Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 1), Quaternion.identity);
     public override void AttackTarget(GameObject target)
     {
-        Debug.Log(magSize);
+        //Debug.Log(magSize);
         if (magSize <= 0)
         {
             //reload
