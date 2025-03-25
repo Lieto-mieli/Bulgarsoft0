@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public Vector2 TarPos;
     Vector3 curPos;
-    float velocity = 6.0f;
+    float velocity = 12.0f;
     // Start is called before the first frame update
 
     void Start()
@@ -28,6 +28,10 @@ public class Bullet : MonoBehaviour
                 hitCollider.gameObject.GetComponent<GuardAITemplate>().hitPoints -= 1;
                 Destroy(gameObject);
             }
+        }
+        if (transform.position == curPos)
+        {
+            Destroy(gameObject);
         }
     }
 }
