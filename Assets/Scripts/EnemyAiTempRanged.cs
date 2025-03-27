@@ -58,7 +58,7 @@ public class EnemyAiTempRanged : EnemyAITemplate
         }
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (doNotMove == true) //lataa
         {
@@ -68,5 +68,5 @@ public class EnemyAiTempRanged : EnemyAITemplate
         {
             moveSpeed = UnitStatsList.unitStats[3][0];
         }
-    }
+    }*/
 }
