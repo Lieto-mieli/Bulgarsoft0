@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 public class EnemyAiTempRanged : EnemyAITemplate
 {
+    Vector3 CurPos;
+    bool doNotMove = false;
     int magSize;
     public GameObject projectile;
     enum EnemyState
@@ -17,6 +20,7 @@ public class EnemyAiTempRanged : EnemyAITemplate
     }
     void Start()
     {
+        
         moveSpeed = UnitStatsList.unitStats[3][0];
         hitPoints = UnitStatsList.unitStats[3][1];
         maxHp = UnitStatsList.unitStats[3][1];
@@ -36,12 +40,14 @@ public class EnemyAiTempRanged : EnemyAITemplate
         //Debug.Log(magSize);
         if (magSize <= 0)
         {
+            doNotMove = true;
             //reload
             magSize = 10;
             Debug.Log("RELOADING");
         }
         else if (magSize >= 1)
         {
+            doNotMove= false;
             magSize --;
             //Debug.Log($"{gameObject.name} Attacks {target.name}");
             base.cooldown = base.attackCooldown;
@@ -49,6 +55,18 @@ public class EnemyAiTempRanged : EnemyAITemplate
             tempBullet.GetComponent<Bullet>().TarPos = base.autoTarget.transform.position;
             //target.GetComponent<GuardAITemplate>().hitPoints -= attackDamage;
             base.endlag = base.attackEndlag;
+        }
+    }
+
+    private void Update()
+    {
+        if (doNotMove == true) //lataa
+        {
+            moveSpeed = 0;
+        }
+        else if (doNotMove == false) //ei lataa
+        {
+            moveSpeed = UnitStatsList.unitStats[3][0];
         }
     }
 }
