@@ -127,7 +127,7 @@ public class EnemyAITemplate : MonoBehaviour
     }
     public void PushAway(Vector2 awayPos, float pushForce)
     {
-        if (moveSpeed > 0)
+        if (moveSpeed > 0 && currentState != EnemyState.MovingToPosition)
         {
             Vector2 curPos = new Vector2(transform.position.x, transform.position.y);
             transform.position = Vector3.MoveTowards(curPos, awayPos, MathF.Min((-pushForce * 1.41f) + Vector2.Distance(curPos, awayPos), 0) * Time.deltaTime);

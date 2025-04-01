@@ -187,30 +187,30 @@ public class Selector : MonoBehaviour
     {
         //Debug.Log("ben");
         currentlySelected.Add(guard);
-        if (guard.TryGetComponent<Guard1AI>(out guard1Out) == true)
-        {
-            GameObject outline = Instantiate(guardOutlineList[0], guard.transform.position, new Quaternion());
-            outline.GetComponent<Outline>().guardToFollow = guard;
-        }
-        //UpdateCameraPortraits();
+        //if (guard.TryGetComponent<Guard1AI>(out guard1Out) == true)
+        //{
+        //    GameObject outline = Instantiate(guardOutlineList[0], guard.transform.position, new Quaternion());
+        //    outline.GetComponent<Outline>().guardToFollow = guard;
+        //}
+        UpdateCameraPortraits();
     }
     public void RemoveObject(GameObject guard)
     {
         currentlySelected.Remove(guard);
-        //UpdateCameraPortraits();
+        UpdateCameraPortraits();
     }
     public void SelectBuilding(GameObject building)
     {
         //Debug.Log("ben");
         ClearSelect();
         buildingSelected = building;
-        //UpdateCameraPortraits();
+        UpdateCameraPortraits();
     }
     public void DeselectBuilding()
     {
         //Debug.Log("ben");
         buildingSelected = null;
-        //UpdateCameraPortraits();
+        UpdateCameraPortraits();
     }
     public void ClearSelect()
     {
@@ -219,13 +219,13 @@ public class Selector : MonoBehaviour
     public void UpdateCameraPortraits() // too resource intensive, most likely cut from game
     {
         buildingMenu.SetActive(false);
-        buildingCamera.SetActive(false);
+        //buildingCamera.SetActive(false);
         fentMenu.SetActive(false);
         guardMenu.SetActive(false);
         if (buildingSelected != null)
         {
             buildingMenu.SetActive(true);
-            buildingCamera.SetActive(true);
+            //buildingCamera.SetActive(true);
             if (buildingSelected.TryGetComponent<Fent>(out fentOut))
             {
                 fentMenu.SetActive(true);
@@ -235,40 +235,40 @@ public class Selector : MonoBehaviour
         else
         {
             guardMenu.SetActive(true);
-            ScorchedEarth(cameraMatList);
-            ScorchedEarth(cameraTexList);
-            ScorchedEarth(cameraList);
-            ScorchedEarth(cameraImageList);
-            cameraMatList.Clear();
-            cameraTexList.Clear();
-            cameraList.Clear();
-            cameraImageList.Clear();
-            foreach (GameObject selected in currentlySelected)
-            {
-                RenderTexture tempTex = new RenderTexture(exampleTexture);
-                Material tempMat = new Material(exampleMaterial);
-                GameObject tempCam = new GameObject();
-                GameObject tempImage = new GameObject();
-                tempCam.AddComponent<Camera>();
-                tempCam.GetComponent<Camera>().targetTexture = tempTex;
-                tempCam.GetComponent<Camera>().orthographic = true;
-                tempCam.GetComponent<Camera>().orthographicSize = 1.0f;
-                tempCam.GetComponent<Camera>().nearClipPlane = 0;
-                tempCam.transform.parent = cameraParent.transform;
-                tempMat.mainTexture = tempTex;
-                tempImage.AddComponent<Image>().material = tempMat;
-                int tempX = currentlySelected.IndexOf(selected)-(Convert.ToInt16(currentlySelected.IndexOf(selected)/3)*3);
-                int tempY = Convert.ToInt16(currentlySelected.IndexOf(selected) / 3);
-                tempX = -33 + (tempX * 33);
-                tempY = 132 - (tempY * 33);
-                tempImage.transform.position = new Vector2(tempX, tempY);
-                tempImage.transform.SetParent(cameraImageParent.transform, false);
-                tempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(30, 30);
-                cameraMatList.Add(tempMat);
-                cameraTexList.Add(tempTex);
-                cameraList.Add(tempCam);
-                cameraImageList.Add(tempImage);
-            }
+            //ScorchedEarth(cameraMatList);
+            //ScorchedEarth(cameraTexList);
+            //ScorchedEarth(cameraList);
+            //ScorchedEarth(cameraImageList);
+            //cameraMatList.Clear();
+            //cameraTexList.Clear();
+            //cameraList.Clear();
+            //cameraImageList.Clear();
+            //foreach (GameObject selected in currentlySelected)
+            //{
+            //    RenderTexture tempTex = new RenderTexture(exampleTexture);
+            //    Material tempMat = new Material(exampleMaterial);
+            //    GameObject tempCam = new GameObject();
+            //    GameObject tempImage = new GameObject();
+            //    tempCam.AddComponent<Camera>();
+            //    tempCam.GetComponent<Camera>().targetTexture = tempTex;
+            //    tempCam.GetComponent<Camera>().orthographic = true;
+            //    tempCam.GetComponent<Camera>().orthographicSize = 1.0f;
+            //    tempCam.GetComponent<Camera>().nearClipPlane = 0;
+            //    tempCam.transform.parent = cameraParent.transform;
+            //    tempMat.mainTexture = tempTex;
+            //    tempImage.AddComponent<Image>().material = tempMat;
+            //    int tempX = currentlySelected.IndexOf(selected)-(Convert.ToInt16(currentlySelected.IndexOf(selected)/3)*3);
+            //    int tempY = Convert.ToInt16(currentlySelected.IndexOf(selected) / 3);
+            //    tempX = -33 + (tempX * 33);
+            //    tempY = 132 - (tempY * 33);
+            //    tempImage.transform.position = new Vector2(tempX, tempY);
+            //    tempImage.transform.SetParent(cameraImageParent.transform, false);
+            //    tempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(30, 30);
+            //    cameraMatList.Add(tempMat);
+            //    cameraTexList.Add(tempTex);
+            //    cameraList.Add(tempCam);
+            //    cameraImageList.Add(tempImage);
+            //}
         }
     }
 
