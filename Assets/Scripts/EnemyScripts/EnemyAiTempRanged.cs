@@ -29,9 +29,11 @@ public class EnemyAiTempRanged : EnemyAITemplate
         attackCooldown = UnitStatsList.unitStats[3][4];
         attackEndlag = UnitStatsList.unitStats[3][5];
         size = UnitStatsList.unitStats[3][8];
+        valueTracker = GameObject.FindWithTag("ValueTracker").GetComponent<ValueTracker>();
         pathfinder = GameObject.FindWithTag("Pathfinder").GetComponent<Pathfinder>();
         targetLists = GameObject.FindWithTag("TargetLists").GetComponent<AttackTargetLists>();
         targetLists.enemyTargets.Add(gameObject);
+        spriteRender = GetComponent<SpriteRenderer>();
         magSize = 10;
     }
     //Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 1), Quaternion.identity);
@@ -44,6 +46,8 @@ public class EnemyAiTempRanged : EnemyAITemplate
             //reload
             magSize = 10;
             Debug.Log("RELOADING");
+            base.cooldown = base.attackCooldown;
+            base.endlag = base.attackEndlag;
         }
         else if (magSize >= 1)
         {

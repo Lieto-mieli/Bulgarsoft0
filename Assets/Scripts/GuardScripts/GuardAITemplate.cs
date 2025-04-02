@@ -77,12 +77,13 @@ public class GuardAITemplate : MonoBehaviour
             {
                 selector.GetComponent<Selector>().currentlySelected.Remove(this.gameObject);
             }
+            valueTracker.guardsLost++;
             Destroy(gameObject);
         }
         cooldown -= Time.deltaTime;
         endlag -= Time.deltaTime;
         //debug(
-        if (endlag > 0) 
+        if (endlag > 0)
         {
             Color tempColor = new Color
             {
@@ -93,7 +94,7 @@ public class GuardAITemplate : MonoBehaviour
             };
             spriteRender.color = tempColor;
         }
-        else if(cooldown > 0)
+        else if (cooldown > 0)
         {
             Color tempColor = new Color
             {
@@ -166,7 +167,7 @@ public class GuardAITemplate : MonoBehaviour
             {
                 if (currentState == GuardState.MovingToPosition && endlag <= 0)
                 {
-                    //Debug.Log("moving");
+                    Debug.Log("moving");
                     curPos = new Vector2(transform.position.x, transform.position.y);
                     transform.position = Vector2.MoveTowards(curPos, shortcutPath[0], moveSpeed * Time.deltaTime);
                     if (Vector2.Distance((Vector2)curPos, shortcutPath[0]) < 0.02f)

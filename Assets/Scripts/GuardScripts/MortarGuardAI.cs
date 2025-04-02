@@ -5,6 +5,8 @@ using UnityEngine;
 public class MortarGuardAI : GuardAITemplate
 {
     public float AoESize;
+    public GameObject explosionParent;
+    public List<ParticleSystem> explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,13 @@ public class MortarGuardAI : GuardAITemplate
     public override void AttackTarget(GameObject target)
     {
         base.cooldown = base.attackCooldown / atkSpeedMult;
+        GameObject temp = Instantiate(explosionParent, target.transform.position, new Quaternion());
+        temp.GetComponent<ParticleSystem>().Play();
+        //temp.GetComponentsInChildren<ParticleSystem>(explosion);
+        //foreach (ParticleSystem par in explosion)
+        //{
+        //    par.Play();
+        //}
         Collider2D[] results = Physics2D.OverlapCircleAll(target.transform.position, AoESize);
         foreach (Collider2D c in results)
         {

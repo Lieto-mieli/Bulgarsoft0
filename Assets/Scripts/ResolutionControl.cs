@@ -57,7 +57,11 @@ public class ResolutionControl : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex = 0;
         resolutionDropdown.RefreshShownValue();
-        SetResolution(currentResolutionIndex);
+        //SetResolution(currentResolutionIndex);
+        if (PlayerPrefs.HasKey("WindowType"))
+        {
+            windowType=PlayerPrefs.GetInt("WindowType");
+        }
     }
 
     public void SetResolution(int resolutionIndex)

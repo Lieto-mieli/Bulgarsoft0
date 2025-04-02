@@ -20,7 +20,7 @@ public class WaveManager : MonoBehaviour
     {
         if (waveMagnitude <= 0 && targetLists.enemyTargets.Count == 0)
         {
-            valueTracker.EndWave();
+            valueTracker.PostWave();
         }
         if (spawnDelay < 0 && waveMagnitude > 0) 
         { 
@@ -45,7 +45,7 @@ public class WaveManager : MonoBehaviour
         if (true)
         {
             Vector2 temp = new Vector2(1, Random.Range(2, 8));
-            Instantiate(chosenEnemy, temp, new Quaternion()).transform.parent = valueTracker.gameplaySum.transform;
+            Instantiate(chosenEnemy, temp, new Quaternion()).transform.SetParent(valueTracker.gameplaySum.transform);
         }
     }
     public void NewWave()

@@ -46,12 +46,12 @@ public class Selector : MonoBehaviour
         {
             if (!AMove)
             {
-                Cursor.SetCursor(Resources.Load<Texture2D>("amovecursor"), new Vector2(0, 0), CursorMode.Auto);
+                //Cursor.SetCursor(Resources.Load<Texture2D>("amovecursor"), new Vector2(0, 0), CursorMode.Auto);
                 AMove = true;
             }
             else
             {
-                Cursor.SetCursor(Resources.Load<Texture2D>("movecursor"), new Vector2(0, 0), CursorMode.Auto);
+                //Cursor.SetCursor(Resources.Load<Texture2D>("movecursor"), new Vector2(0, 0), CursorMode.Auto);
                 AMove = false;
             }
         }
@@ -120,12 +120,12 @@ public class Selector : MonoBehaviour
                 }
                 else if(tempGuardCount > 0)
                 {
-                    Cursor.SetCursor(Resources.Load<Texture2D>("movecursor"), new Vector2(0,0), CursorMode.Auto);
+                    //Cursor.SetCursor(Resources.Load<Texture2D>("movecursor"), new Vector2(0,0), CursorMode.Auto);
                     AMove = false;
                 }
                 else
                 {
-                    Cursor.SetCursor(null, new Vector2(0, 0), CursorMode.Auto);
+                    //Cursor.SetCursor(null, new Vector2(0, 0), CursorMode.Auto);
                     AMove = false;
                 }
                 maalausBox.SetActive(false);

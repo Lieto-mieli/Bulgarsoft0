@@ -9,15 +9,15 @@ public class BuyableScrollMenu : MonoBehaviour
 {
     public string curSelected;
     private static List<string> unitList = new List<string>() { 
-        "guard1" ,
-        "tower" ,
-        "mortar"
+        "Guard" ,
+        //"tower" ,
+        "Mortar"
     }; //this will change depending on player unlocks
     private int nroOfUnits;
     public List<GameObject> selectButtonList = new List<GameObject>();
     public GameObject exampleButton;
     // moveSpeed, hitPoints, attackDamage, attackRange, attackCooldown, attackEndlag, defence
-    private float[] statMaximums = new float[] { 3f, 100f, 15f, 16f, 5f, 1.5f, 3f };
+    private float[] statMaximums = new float[] { 7f, 100f, 15f, 15f, 5f, 1.5f, 3f };
     public GameObject infoDisplay;
     public ValueTracker valueTracker;
     public List<GameObject> units;
@@ -57,6 +57,7 @@ public class BuyableScrollMenu : MonoBehaviour
             valueTracker.playerCash -= (int)UnitStatsList.unitStats[UnitStatsList.IDList.IndexOf(curSelected)][7];
             valueTracker.playerUnits.Add(Instantiate(units[UnitStatsList.IDList.IndexOf(curSelected)]));
             valueTracker.playerUnits.Last().transform.SetParent(valueTracker.gameplaySum.transform,true);
+            valueTracker.playerUnits.Last().transform.position = new Vector2(UnityEngine.Random.Range(12.5f, 13.5f), UnityEngine.Random.Range(4.5f, 5.5f));
             // cash register sound here would be nice?
         }
         else

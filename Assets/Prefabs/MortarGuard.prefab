@@ -121,6 +121,9 @@ MonoBehaviour:
   pathfinder: {fileID: 0}
   currentState: 0
   atkSpeedMult: 1
+  AoESize: 0
+  explosionParent: {fileID: 4070914532694125766, guid: 3360fb163dcb82643910f130317f401d, type: 3}
+  explosion: []
 --- !u!61 &2931677408971796240
 BoxCollider2D:
   m_ObjectHideFlags: 0

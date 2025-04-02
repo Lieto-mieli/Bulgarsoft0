@@ -24,10 +24,16 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
+        Debug.Log("thisshouldwork1");
     }
     public void SettingsToggle()
     {
         settingsMenu.SetActive(!settingsMenu.activeSelf);
+        Debug.Log("thisshouldwork2");
+    }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("InGame");
     }
     public void MainMenu()
     {

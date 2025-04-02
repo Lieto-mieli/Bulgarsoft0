@@ -15,11 +15,13 @@ public class EnemyAITemplate : MonoBehaviour
     public float attackEndlag;
     public float size;
     public AttackTargetLists targetLists;
+    public ValueTracker valueTracker;
     bool ignoreTargets;
     Vector3 curPos;
     public Vector2 targetPos;
     public float cooldown;
     public float endlag;
+    public SpriteRenderer spriteRender;
     public Pathfinder pathfinder;
     List<Vector2> shortcutPath;
     EnemyState currentState;
@@ -34,9 +36,11 @@ public class EnemyAITemplate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        valueTracker = GameObject.FindWithTag("ValueTracker").GetComponent<ValueTracker>();
         pathfinder = GameObject.FindWithTag("Pathfinder").GetComponent<Pathfinder>();
         targetLists = GameObject.FindWithTag("TargetLists").GetComponent<AttackTargetLists>();
         targetLists.enemyTargets.Add(gameObject);
+        spriteRender = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -45,7 +49,41 @@ public class EnemyAITemplate : MonoBehaviour
         if (hitPoints <= 0)
         {
             targetLists.enemyTargets.Remove(gameObject);
+            valueTracker.enemiesKilled++;
             Destroy(gameObject);
+        }
+        if (endlag > 0)
+        {
+            Color tempColor = new Color
+            {
+                r = 1,
+                g = 0.5f,
+                b = 0.5f,
+                a = 1
+            };
+            spriteRender.color = tempColor;
+        }
+        else if (cooldown > 0)
+        {
+            Color tempColor = new Color
+            {
+                r = 1,
+                g = 1,
+                b = 0.5f,
+                a = 1
+            };
+            spriteRender.color = tempColor;
+        }
+        else
+        {
+            Color tempColor = new Color
+            {
+                r = 1,
+                g = 1,
+                b = 1,
+                a = 1
+            };
+            spriteRender.color = tempColor;
         }
         endlag -= Time.deltaTime;
         cooldown -= Time.deltaTime;
