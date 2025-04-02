@@ -8,8 +8,11 @@ public class WaveManager : MonoBehaviour
     public float waveIntensity;
     public int waveMagnitude;
     public GameObject Enemy1;
+    public GameObject Enemy2;
     public ValueTracker valueTracker;
     public AttackTargetLists targetLists;
+    private int characterToSpawn;
+    private GameObject chosenEnemy;
     // Start is called before the first frame update
 
     // Update is called once per frame
@@ -29,10 +32,20 @@ public class WaveManager : MonoBehaviour
     }
     public void SpawnEnemy()
     {
+        characterToSpawn = Random.Range(1, 3);
+        Debug.Log(characterToSpawn);
+        switch(characterToSpawn)
+        {
+            case 1: chosenEnemy = Enemy1;
+                break;
+            case 2: chosenEnemy = Enemy2;
+                break;
+        }
+        Debug.Log(chosenEnemy);
         if (true)
         {
             Vector2 temp = new Vector2(1, Random.Range(2, 8));
-            Instantiate(Enemy1, temp, new Quaternion()).transform.parent = valueTracker.gameplaySum.transform;
+            Instantiate(chosenEnemy, temp, new Quaternion()).transform.parent = valueTracker.gameplaySum.transform;
         }
     }
     public void NewWave()
