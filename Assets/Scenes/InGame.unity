@@ -16537,6 +16537,7 @@ MonoBehaviour:
   waveIntensity: 1
   waveMagnitude: 3
   Enemy1: {fileID: 2207830864905410726, guid: 691bf0994e1044c4f9ff1b0a59692dff, type: 3}
+  Enemy2: {fileID: 1923051784}
   valueTracker: {fileID: 385444071}
   targetLists: {fileID: 198117212}
 --- !u!4 &2105494659
