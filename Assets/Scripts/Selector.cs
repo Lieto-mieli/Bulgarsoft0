@@ -29,10 +29,11 @@ public class Selector : MonoBehaviour
     public GameObject cameraImageParent;
     public GameObject cameraParent;
     Vector2 startPos;
-    float tempX;
+    float tempX;    
     float tempY;
     float tempZ;
     bool maalaa;
+    public bool AMove;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +42,19 @@ public class Selector : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A) && currentlySelected.Count > 0)
+        {
+            if (!AMove)
+            {
+                Cursor.SetCursor(Resources.Load<Texture2D>("amovecursor"), new Vector2(0, 0), CursorMode.Auto);
+                AMove = true;
+            }
+            else
+            {
+                Cursor.SetCursor(Resources.Load<Texture2D>("movecursor"), new Vector2(0, 0), CursorMode.Auto);
+                AMove = false;
+            }
+        }
         if (cameraList.Count != 0 && currentlySelected.Count != 0)
         {
             foreach(GameObject cam in cameraList)
@@ -103,6 +117,16 @@ public class Selector : MonoBehaviour
                 if(tempGuardCount == 0 && tempBuilding != null)
                 {
                     SelectBuilding(tempBuilding);
+                }
+                else if(tempGuardCount > 0)
+                {
+                    Cursor.SetCursor(Resources.Load<Texture2D>("movecursor"), new Vector2(0,0), CursorMode.Auto);
+                    AMove = false;
+                }
+                else
+                {
+                    Cursor.SetCursor(null, new Vector2(0, 0), CursorMode.Auto);
+                    AMove = false;
                 }
                 maalausBox.SetActive(false);
             }

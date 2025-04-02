@@ -10,13 +10,14 @@ public class BuyableScrollMenu : MonoBehaviour
     public string curSelected;
     private static List<string> unitList = new List<string>() { 
         "guard1" ,
-        "tower"
+        "tower" ,
+        "mortar"
     }; //this will change depending on player unlocks
     private int nroOfUnits;
     public List<GameObject> selectButtonList = new List<GameObject>();
     public GameObject exampleButton;
     // moveSpeed, hitPoints, attackDamage, attackRange, attackCooldown, attackEndlag, defence
-    private float[] statMaximums = new float[] { 3f, 100f, 15f, 8f, 5f, 1f, 3f };
+    private float[] statMaximums = new float[] { 3f, 100f, 15f, 16f, 5f, 1.5f, 3f };
     public GameObject infoDisplay;
     public ValueTracker valueTracker;
     public List<GameObject> units;

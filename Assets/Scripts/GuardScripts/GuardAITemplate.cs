@@ -37,10 +37,10 @@ public class GuardAITemplate : MonoBehaviour
     public bool ignoreTargets;
     public Vector3 curPos;
     public Vector2 targetPos;
-    float cooldown;
-    float endlag;
+    public float cooldown;
+    public float endlag;
     GameObject autoTarget;
-    GameObject manualTarget;
+    public GameObject manualTarget;
     float bestSoFar;
     public SpriteRenderer spriteRender;
     public Pathfinder pathfinder;
@@ -118,13 +118,13 @@ public class GuardAITemplate : MonoBehaviour
         //debug)
         if (endlag <= 0)
         {
-            if (manualTarget != null)
-            {
-                if (Vector2.Distance(manualTarget.transform.position, transform.position) <= attackRange)
-                {
-                    manualTarget = null;
-                }
-            }
+            //if (manualTarget != null)
+            //{
+            //    if (Vector2.Distance(manualTarget.transform.position, transform.position) <= attackRange)
+            //    {
+            //        manualTarget = null;
+            //    }
+            //}
             bestSoFar = 9999;
             autoTarget = null;
             foreach (GameObject target in targetLists.enemyTargets)
@@ -141,7 +141,16 @@ public class GuardAITemplate : MonoBehaviour
                 //Instantiate(outline, transform.position, new Quaternion());
                 if (Input.GetMouseButtonDown(1))
                 {
-                    MoveToPosition();
+                    if (selector.GetComponent<Selector>().AMove)
+                    {
+                        manualTarget = null;
+                        AttackMove();
+                    }
+                    else
+                    {
+                        manualTarget = null;
+                        MoveToPosition();
+                    }
                     //Debug.Log("move");
                 }
             }
@@ -155,7 +164,7 @@ public class GuardAITemplate : MonoBehaviour
             }
             else
             {
-                if (currentState == GuardState.MovingToPosition)
+                if (currentState == GuardState.MovingToPosition && endlag <= 0)
                 {
                     //Debug.Log("moving");
                     curPos = new Vector2(transform.position.x, transform.position.y);
@@ -275,11 +284,23 @@ public class GuardAITemplate : MonoBehaviour
             //}
         //}
     }
-    public void AttackTarget(GameObject target)
+    public virtual void AttackTarget(GameObject target)
     {
         //Debug.Log($"{gameObject.name} Attacks {target.name}");
         cooldown = attackCooldown / atkSpeedMult;
         target.GetComponent<EnemyAITemplate>().hitPoints -= attackDamage;
         endlag = attackEndlag / atkSpeedMult;
+    }
+    public virtual void AttackMove()
+    {
+        ignoreTargets = false;
+        List<Vector2> path = pathfinder.Pathfind(transform.position, camera.ScreenToWorldPoint(Input.mousePosition), size);
+        if (path != null)
+        {
+            targetPos = camera.ScreenToWorldPoint(Input.mousePosition);
+            path.Add(targetPos);
+            shortcutPath = path;
+            currentState = GuardState.MovingToPosition;
+        }
     }
 }
