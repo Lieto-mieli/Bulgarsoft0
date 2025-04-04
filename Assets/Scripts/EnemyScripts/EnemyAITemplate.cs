@@ -127,7 +127,7 @@ public class EnemyAITemplate : MonoBehaviour
             }
             else
             {
-                if (currentState == EnemyState.MovingToPosition)
+                if (currentState == EnemyState.MovingToPosition && Vector2.Distance((Vector2)curPos, targetPos) > attackRange)
                 {
                     //Debug.Log("moving");
                     curPos = new Vector2(transform.position.x, transform.position.y);

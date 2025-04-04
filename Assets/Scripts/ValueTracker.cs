@@ -30,7 +30,7 @@ public class ValueTracker : MonoBehaviour
     void Start()
     {
         waveNum = 1;
-        playerCash = 10000;
+        playerCash = 0;
         PreWave();
     }
     void Update()
@@ -109,6 +109,7 @@ public class ValueTracker : MonoBehaviour
         }
         waveNum++;
         guardsLost = 0;
+        enemiesKilled = 0;
     }
     private Color ChooseTextColor(float value, bool expectedValue)
     {

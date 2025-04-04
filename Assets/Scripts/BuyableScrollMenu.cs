@@ -17,7 +17,7 @@ public class BuyableScrollMenu : MonoBehaviour
     public List<GameObject> selectButtonList = new List<GameObject>();
     public GameObject exampleButton;
     // moveSpeed, hitPoints, attackDamage, attackRange, attackCooldown, attackEndlag, defence
-    private float[] statMaximums = new float[] { 7f, 100f, 15f, 15f, 5f, 1.5f, 3f };
+    private float[] statMaximums = new float[] { 7f, 25f, 15f, 15f, 5f, 1.5f, 3f };
     public GameObject infoDisplay;
     public ValueTracker valueTracker;
     public List<GameObject> units;

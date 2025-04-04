@@ -50,7 +50,7 @@ public class WaveManager : MonoBehaviour
     }
     public void NewWave()
     {
-        waveIntensity = Mathf.Pow(valueTracker.waveNum, 1.3f);
-        waveMagnitude = (int)(Mathf.Pow(valueTracker.waveNum, 1.3f)*2);
+        waveIntensity = Mathf.Pow(valueTracker.waveNum, 1.35f);
+        waveMagnitude = (int)(Mathf.Pow(valueTracker.waveNum, 1.35f)*2);
     }
 }

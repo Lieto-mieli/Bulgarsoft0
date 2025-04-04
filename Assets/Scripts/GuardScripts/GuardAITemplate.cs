@@ -167,7 +167,7 @@ public class GuardAITemplate : MonoBehaviour
             {
                 if (currentState == GuardState.MovingToPosition && endlag <= 0)
                 {
-                    Debug.Log("moving");
+                    //Debug.Log("moving");
                     curPos = new Vector2(transform.position.x, transform.position.y);
                     transform.position = Vector2.MoveTowards(curPos, shortcutPath[0], moveSpeed * Time.deltaTime);
                     if (Vector2.Distance((Vector2)curPos, shortcutPath[0]) < 0.02f)
