@@ -45,18 +45,22 @@ public class Pathfinding {
         foreach (SuperCustomProperties tile in tiles)
         {
             CustomProperty temp = null;
-            Debug.Log(count);
-            Debug.Log(tile.transform.position.x + "," + tile.transform.position.y);
+            //Debug.Log(count);
+            //Debug.Log(tile.transform.position.x + "," + tile.transform.position.y);
             tile.m_Properties.TryGetProperty("passable", out temp);
             if (temp != null)
             {
                 int y = (int)(count / 60);
                 int x = (int)(count - (y * 60));
-                Debug.Log(x + "," + y);
+                //Debug.Log(x + "," + y);
                 if (temp.m_Value == "0")
                 {
                     float pos = count;
                     grid.GetGridObject(x, y).SetIsWalkable(false);
+                    tile.gameObject.tag = "Terrain";
+                    tile.gameObject.AddComponent<BoxCollider2D>();
+                    //Vector2 tempCol = tile.GetComponent<BoxCollider2D>().size;
+                    //tile.GetComponent<BoxCollider2D>().size.Set(0.64f, 0.64f);
                 }
                 else if (temp.m_Value == "1")
                 {

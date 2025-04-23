@@ -58,6 +58,7 @@ public class LineofSightCheck : MonoBehaviour
     }
     public List<Vector2> CalculateColliderPoints(Vector3[] linePoints, float size)
     {
+        size = 0;
         Vector3[] positions = linePoints;
         //foreach (Vector2 position in positions)
         //{
@@ -114,9 +115,9 @@ public class LineofSightCheck : MonoBehaviour
 
         float distance = Vector2.Distance(points[0], points[1]);
         Physics2D.Raycast(points[0], direction0, filt, hit0, distance) ;
-        Debug.DrawLine(points[0], points[0] + direction0.normalized * distance, Color.magenta, 7f);
+        Debug.DrawLine(points[0], points[0] + direction0.normalized * distance, Color.magenta, 1f);
         Physics2D.Raycast(points[3], direction1, filt, hit1, distance);
-        Debug.DrawLine(points[3], points[3] + direction1.normalized * distance, Color.magenta, 7f);
+        Debug.DrawLine(points[3], points[3] + direction1.normalized * distance, Color.magenta, 1f);
         foreach(RaycastHit2D hit in hit0)
         {
             if (hit.collider != null)
