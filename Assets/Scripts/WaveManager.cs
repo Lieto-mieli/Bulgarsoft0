@@ -1,3 +1,4 @@
+using SuperTiled2Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class WaveManager : MonoBehaviour
     public GameObject Enemy2;
     public ValueTracker valueTracker;
     public AttackTargetLists targetLists;
+    public SuperMap map;
     private int characterToSpawn;
     private GameObject chosenEnemy;
     // Start is called before the first frame update
@@ -44,7 +46,7 @@ public class WaveManager : MonoBehaviour
         Debug.Log(chosenEnemy);
         if (true)
         {
-            Vector2 temp = new Vector2(1, Random.Range(2, 8));
+            Vector2 temp = new Vector2(Random.Range(0, 60), Random.Range(0, 50));
             Instantiate(chosenEnemy, temp, new Quaternion()).transform.SetParent(valueTracker.gameplaySum.transform);
         }
     }

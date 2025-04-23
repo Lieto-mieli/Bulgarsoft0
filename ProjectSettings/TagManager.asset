@@ -13,6 +13,7 @@ TagManager:
   - Building
   - Enemy
   - ValueTracker
+  - Tile
   layers:
   - Default
   - TransparentFX

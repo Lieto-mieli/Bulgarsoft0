@@ -9,7 +9,7 @@ using static UnityEngine.GraphicsBuffer;
 public class EnemyAiTempRanged : EnemyAITemplate
 {
     Vector3 CurPos;
-    bool doNotMove = false;
+    //bool doNotMove = false;
     int magSize;
     public GameObject projectile;
     enum EnemyState
@@ -42,7 +42,7 @@ public class EnemyAiTempRanged : EnemyAITemplate
         //Debug.Log(magSize);
         if (magSize <= 0)
         {
-            doNotMove = true;
+            //doNotMove = true;
             //reload
             magSize = 10;
             Debug.Log("RELOADING");
@@ -51,7 +51,7 @@ public class EnemyAiTempRanged : EnemyAITemplate
         }
         else if (magSize >= 1)
         {
-            doNotMove= false;
+            //doNotMove= false;
             magSize --;
             //Debug.Log($"{gameObject.name} Attacks {target.name}");
             base.cooldown = base.attackCooldown;

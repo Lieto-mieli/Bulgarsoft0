@@ -7,6 +7,7 @@ using Unity.Mathematics;
 
 public class ValueTracker : MonoBehaviour
 {
+    public WindowControl windowControl;
     public TextMeshProUGUI cashCounter;
     public GameObject gameplaySum;
     public GameObject buymenuSum;
@@ -29,6 +30,10 @@ public class ValueTracker : MonoBehaviour
     public int enemiesKilled;
     void Start()
     {
+        if (PlayerPrefs.HasKey("WindowType"))
+        {
+            windowControl.ChangeType(PlayerPrefs.GetInt("WindowType"));
+        }
         waveNum = 1;
         playerCash = 0;
         PreWave();

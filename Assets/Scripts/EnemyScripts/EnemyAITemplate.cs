@@ -182,6 +182,10 @@ public class EnemyAITemplate : MonoBehaviour
                 targetPos = pos;
                 path.Add(targetPos);
                 shortcutPath = path;
+                //foreach(Vector2 pathNode in path)
+                //{
+                //    Debug.Log(pathNode.x+","+pathNode.y);
+                //}
                 currentState = EnemyState.MovingToPosition;
             }
         }
