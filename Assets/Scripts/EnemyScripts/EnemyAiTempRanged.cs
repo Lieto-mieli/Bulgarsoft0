@@ -37,7 +37,7 @@ public class EnemyAiTempRanged : EnemyAITemplate
         magSize = 10;
     }
     //Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 1), Quaternion.identity);
-    public override void AttackTarget(GameObject target)
+    public override void AttackTarget(GameObject target) //kalle alkaa
     {
         //Debug.Log(magSize);
         if (magSize <= 0)
@@ -60,7 +60,7 @@ public class EnemyAiTempRanged : EnemyAITemplate
             //target.GetComponent<GuardAITemplate>().hitPoints -= attackDamage;
             base.endlag = base.attackEndlag;
         }
-    }
+    } //kalle loppuu
 
     /*private void Update()
     {

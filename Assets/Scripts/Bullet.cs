@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Bullet : MonoBehaviour
 {
+    /// <summary>
+    /// kalle kalle
+    /// </summary>
     public Vector2 TarPos;
     Vector3 curPos;
     float velocity = 12.0f;
@@ -26,6 +30,11 @@ public class Bullet : MonoBehaviour
             if (hitCollider.CompareTag("Guard"))
             {
                 hitCollider.gameObject.GetComponent<GuardAITemplate>().hitPoints -= 1;
+                Destroy(gameObject);
+            }
+            else if (hitCollider.CompareTag("Enemy"))
+            {
+                hitCollider.gameObject.GetComponent<EnemyAITemplate>().hitPoints -= 1;
                 Destroy(gameObject);
             }
         }

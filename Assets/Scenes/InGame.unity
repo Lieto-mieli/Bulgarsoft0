@@ -54551,6 +54551,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard1
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
     - target: {fileID: 3232812135763961454, guid: 7dde23515e7e5454b83049dd157422f1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -54558,6 +54559,23 @@ PrefabInstance:
     - target: {fileID: 4713944701029498607, guid: 7dde23515e7e5454b83049dd157422f1, type: 3}
       propertyPath: m_SortingOrder
       value: 0
+=======
+    - target: {fileID: 4713944701029498607, guid: 7dde23515e7e5454b83049dd157422f1, type: 3}
+      propertyPath: m_Size.x
+      value: 1.024
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713944701029498607, guid: 7dde23515e7e5454b83049dd157422f1, type: 3}
+      propertyPath: m_Size.y
+      value: 1.024
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713944701029498607, guid: 7dde23515e7e5454b83049dd157422f1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 276a843b5d6ef3443b6a926498e41350, type: 3}
+    - target: {fileID: 4713944701029498607, guid: 7dde23515e7e5454b83049dd157422f1, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -39,7 +39,7 @@ public class GuardAITemplate : MonoBehaviour
     public Vector2 targetPos;
     public float cooldown;
     public float endlag;
-    GameObject autoTarget;
+    public GameObject autoTarget;
     public GameObject manualTarget;
     float bestSoFar;
     public SpriteRenderer spriteRender;

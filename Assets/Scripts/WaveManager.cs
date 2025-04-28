@@ -32,7 +32,7 @@ public class WaveManager : MonoBehaviour
         }
         spawnDelay -= Time.deltaTime;
     }
-    public void SpawnEnemy()
+    public void SpawnEnemy() //kalle alkaa
     {
         characterToSpawn = Random.Range(1, 3);
         Debug.Log(characterToSpawn);
@@ -43,11 +43,11 @@ public class WaveManager : MonoBehaviour
             case 2: chosenEnemy = Enemy2;
                 break;
         }
-        Debug.Log(chosenEnemy);
+        Debug.Log(chosenEnemy); 
         if (true)
         {
             Vector2 temp = new Vector2(Random.Range(0, 60), Random.Range(0, 50));
-            Instantiate(chosenEnemy, temp, new Quaternion()).transform.SetParent(valueTracker.gameplaySum.transform);
+            Instantiate(chosenEnemy, temp, new Quaternion()).transform.SetParent(valueTracker.gameplaySum.transform); //kalle loppuu
         }
     }
     public void NewWave()
