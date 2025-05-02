@@ -69,7 +69,7 @@ public class GuardAITemplate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hitPoints <= 0)
+        if (hitPoints <= 0) //if hitpoints go to/below 0, die
         {
             targetLists.playerTargets.Remove(gameObject);
             valueTracker.playerUnits.Remove(gameObject);
@@ -82,7 +82,7 @@ public class GuardAITemplate : MonoBehaviour
         }
         cooldown -= Time.deltaTime;
         endlag -= Time.deltaTime;
-        //debug(
+        //debug( this sets the guards hue based on what state they are in, should be replaced with animations once they exist
         if (endlag > 0)
         {
             Color tempColor = new Color
@@ -117,7 +117,7 @@ public class GuardAITemplate : MonoBehaviour
             spriteRender.color = tempColor;
         }
         //debug)
-        if (endlag <= 0)
+        if (endlag <= 0) // guard has to be out of their attacks endlag to do anything, other than die and exist of course
         {
             //if (manualTarget != null)
             //{
@@ -128,7 +128,7 @@ public class GuardAITemplate : MonoBehaviour
             //}
             bestSoFar = 9999;
             autoTarget = null;
-            foreach (GameObject target in targetLists.enemyTargets)
+            foreach (GameObject target in targetLists.enemyTargets) //chooses the closest target that is in attack range
             {
                 if (target != null && Vector2.Distance(target.transform.position, transform.position) <= attackRange && Vector2.Distance(target.transform.position, transform.position) <= bestSoFar)
                 {
@@ -137,7 +137,7 @@ public class GuardAITemplate : MonoBehaviour
                 }
             }
             selected = selector.GetComponent<Selector>().currentlySelected.Contains(this.gameObject);
-            if (selected)
+            if (selected) //if guard is selected, listen for player inputs
             {
                 //Instantiate(outline, transform.position, new Quaternion());
                 if (Input.GetMouseButtonDown(1))
@@ -155,6 +155,7 @@ public class GuardAITemplate : MonoBehaviour
                     //Debug.Log("move");
                 }
             }
+            //if the guard should attack a target and hasnt been given a moveToPosition command, do so.
             if (manualTarget != null && !ignoreTargets && cooldown <= 0)
             {
                 AttackTarget(manualTarget);
@@ -163,7 +164,7 @@ public class GuardAITemplate : MonoBehaviour
             {
                 AttackTarget(autoTarget);
             }
-            else
+            else // if no attack is made, and the guard should move, do so.
             {
                 if (currentState == GuardState.MovingToPosition && endlag <= 0)
                 {
@@ -185,7 +186,7 @@ public class GuardAITemplate : MonoBehaviour
                 }
             }
         }
-        Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, size);
+        Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, size); //checks for nearby guards and enemies and pushes them away from this guard
         //Debug.Log($"this:{results[0].name}, {transform.position}");
         foreach(Collider2D c in results)
         {
@@ -206,7 +207,7 @@ public class GuardAITemplate : MonoBehaviour
             }
         }
     }
-    public void PushAway(Vector2 awayPos, float pushForce)
+    public void PushAway(Vector2 awayPos, float pushForce) // called by other guards and enemies that want to push this guard away, only works if this guard is not currently going somewhere
     {
         //Debug.Log("ebin");
         if (moveSpeed > 0 && currentState != GuardState.MovingToPosition)
@@ -226,7 +227,7 @@ public class GuardAITemplate : MonoBehaviour
     //        selector.GetComponent<Selector>().RemoveObject(this.gameObject);
     //    }
     //}
-    public void MoveToPosition()
+    public virtual void MoveToPosition() //set guard movement path to where the player is pointing and ignore enemies until reaching destination
     {
         //Debug.Log("moveStarted");
         ignoreTargets = true;
@@ -285,14 +286,14 @@ public class GuardAITemplate : MonoBehaviour
             //}
         //}
     }
-    public virtual void AttackTarget(GameObject target)
+    public virtual void AttackTarget(GameObject target)//get the EnemyAITemplate script of the target and reduce its hp
     {
         //Debug.Log($"{gameObject.name} Attacks {target.name}");
         cooldown = attackCooldown / atkSpeedMult;
         target.GetComponent<EnemyAITemplate>().hitPoints -= attackDamage;
         endlag = attackEndlag / atkSpeedMult;
     }
-    public virtual void AttackMove()
+    public virtual void AttackMove() // similar to moveToPosition but does not ignore attack targets while doing so.
     {
         ignoreTargets = false;
         List<Vector2> path = pathfinder.Pathfind(transform.position, camera.ScreenToWorldPoint(Input.mousePosition), size);

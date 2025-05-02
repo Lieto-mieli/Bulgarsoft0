@@ -46,12 +46,13 @@ public class EnemyAITemplate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hitPoints <= 0)
+        if (hitPoints <= 0) //if hitpoints go to/below 0, die
         {
             targetLists.enemyTargets.Remove(gameObject);
             valueTracker.enemiesKilled++;
             Destroy(gameObject);
         }
+        //debug( this sets the enemies hue based on what state they are in, should be replaced with animations once they exist
         if (endlag > 0)
         {
             Color tempColor = new Color
@@ -85,13 +86,14 @@ public class EnemyAITemplate : MonoBehaviour
             };
             spriteRender.color = tempColor;
         }
+        //debug)
         endlag -= Time.deltaTime;
         cooldown -= Time.deltaTime;
-        if (endlag <= 0)
+        if (endlag <= 0) // enemy has to be out of their attacks endlag to do anything other than die
         {
             bestSoFar = 9999;
             autoTarget = null;
-            foreach (GameObject target in targetLists.playerTargets)
+            foreach (GameObject target in targetLists.playerTargets) //chooses the closest target that is in attack range
             {
                 if (target != null && Vector2.Distance(target.transform.position, transform.position) <= attackRange && Vector2.Distance(target.transform.position, transform.position) <= bestSoFar)
                 {
@@ -101,7 +103,7 @@ public class EnemyAITemplate : MonoBehaviour
                 }
             }
             //Instantiate(outline, transform.position, new Quaternion());
-            if (targetLists.playerTargets.Count > 0 && autoTarget == null)
+            if (targetLists.playerTargets.Count > 0 && autoTarget == null) //if there are targets, but none of them are within attackRange distance, choose the closest target
             {
                 foreach (GameObject target in targetLists.playerTargets)
                 {
@@ -113,7 +115,7 @@ public class EnemyAITemplate : MonoBehaviour
                     }
                 }
             }
-            if (autoTarget != null&&shortcutPath==null)
+            if (autoTarget != null&&shortcutPath==null)//this is not perfect and should be redone at some point
             {
                 MoveToPosition(targetPos);
             }
@@ -149,7 +151,7 @@ public class EnemyAITemplate : MonoBehaviour
                 }
             }
         }
-        Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, size);
+        Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, size);//checks for nearby enemies and guards and pushes them away from this enemy
         foreach (Collider2D c in results)
         {
             //Debug.Log("enemyshittis");
@@ -169,7 +171,7 @@ public class EnemyAITemplate : MonoBehaviour
             }
         }
     }
-    public void PushAway(Vector2 awayPos, float pushForce)
+    public void PushAway(Vector2 awayPos, float pushForce) // called by other enemies and guards that want to push this enemy away, only works if this enemy is not currently going somewhere
     {
         if (moveSpeed > 0 && currentState != EnemyState.MovingToPosition)
         {
@@ -177,7 +179,7 @@ public class EnemyAITemplate : MonoBehaviour
             transform.position = Vector3.MoveTowards(curPos, awayPos, MathF.Min((-pushForce * 1.41f) + Vector2.Distance(curPos, awayPos), 0) * Time.deltaTime);
         }
     }
-    public void MoveToPosition(Vector2 pos)
+    public void MoveToPosition(Vector2 pos) //set enemy movement path to pos from position
     {
         //Debug.Log("moveStarted");
         if (true)
@@ -196,7 +198,7 @@ public class EnemyAITemplate : MonoBehaviour
             }
         }
     }
-    public virtual void AttackTarget(GameObject target)
+    public virtual void AttackTarget(GameObject target) //get the GuardAITemplate script of the target and reduce its hp
     {
         //Debug.Log($"{gameObject.name} Attacks {target.name}");
         cooldown = attackCooldown;
