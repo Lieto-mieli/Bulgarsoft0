@@ -28,9 +28,8 @@ public class Guard1AI : GuardAITemplate
         spriteRender = GetComponent<SpriteRenderer>();
         pathfinder = GameObject.FindWithTag("Pathfinder").GetComponent<Pathfinder>();
     }
-
-    public override void AttackTarget(GameObject target) //kalle alkaa
-    {
+    public override void AttackTarget(GameObject target)
+    {// kalle alkaa
         //Debug.Log(magSize);
         if (magSize <= 0)
         {
