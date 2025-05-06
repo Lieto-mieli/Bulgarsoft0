@@ -134,8 +134,8 @@ public class EnemyAITemplate : MonoBehaviour
                     //Debug.Log("moving");
                     curPos = new Vector2(transform.position.x, transform.position.y);
                     transform.position = Vector2.MoveTowards(curPos, shortcutPath[0], moveSpeed * Time.deltaTime);
-                    Debug.Log(Vector2.Distance((Vector2)curPos, shortcutPath[0]));
-                    Debug.Log(shortcutPath.Count);
+                    //<Debug.Log(Vector2.Distance((Vector2)curPos, shortcutPath[0]));
+                    //Debug.Log(shortcutPath.Count);
                     if (Vector2.Distance((Vector2)curPos, shortcutPath[0]) < 0.02f)
                     {
                         shortcutPath.Remove(shortcutPath[0]);

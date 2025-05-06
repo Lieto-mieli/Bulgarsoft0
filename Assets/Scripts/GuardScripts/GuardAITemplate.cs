@@ -47,6 +47,7 @@ public class GuardAITemplate : MonoBehaviour
     List<Vector2> shortcutPath;
     public GuardState currentState;
     public float atkSpeedMult = 1;
+    public Vector3 KustomEulerAngles;
     public enum GuardState
     {
         Passive,
@@ -56,6 +57,7 @@ public class GuardAITemplate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        KustomEulerAngles = transform.eulerAngles;
         selector = GameObject.FindWithTag("Selector");
         camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         targetLists = GameObject.FindWithTag("TargetLists").GetComponent<AttackTargetLists>();
@@ -69,6 +71,19 @@ public class GuardAITemplate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.x > 17.63)
+        {
+            //KustomEulerAngles.y = 180f;
+            transform.eulerAngles = new Vector3(0, 180f, 0);
+            //Debug.Log("ali "+transform.position.x);
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(0, 0f, 0);
+            //Debug.Log("yli");
+            //KustomEulerAngles.y = 0f;
+        }
+
         if (hitPoints <= 0) //if hitpoints go to/below 0, die
         {
             targetLists.playerTargets.Remove(gameObject);
