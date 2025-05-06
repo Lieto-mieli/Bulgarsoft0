@@ -54554,7 +54554,7 @@ PrefabInstance:
 <<<<<<< Updated upstream
     - target: {fileID: 3232812135763961454, guid: 7dde23515e7e5454b83049dd157422f1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4713944701029498607, guid: 7dde23515e7e5454b83049dd157422f1, type: 3}
       propertyPath: m_SortingOrder

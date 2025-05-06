@@ -25,7 +25,7 @@ public class LineofSightCheck : MonoBehaviour
     {
         //Debug.Log(Physics2D.IsTouching(polyCollider, GameObject.FindGameObjectWithTag("Terrain").GetComponent<Collider2D>()));
     }
-    public bool NewLineCheck(Vector2 startPos, Vector2 endPos, List<string> checkedTags, float size)
+    public bool NewLineCheck(Vector2 startPos, Vector2 endPos, List<string> checkedTags, float size) //checks if there are walls/terrain inbetween two points on the map
     {
         tagCheck = false;
         tagsToCheck = checkedTags;
@@ -56,9 +56,9 @@ public class LineofSightCheck : MonoBehaviour
         //Debug.Log(tagCheck);
         return tagCheck;
     }
-    public List<Vector2> CalculateColliderPoints(Vector3[] linePoints, float size)
+    public List<Vector2> CalculateColliderPoints(Vector3[] linePoints, float size) //calculate where to draw raycast checks, currently set to width 0
     {
-        size = 0;
+        size = 0; //it barely functions but it does so i wont change it yet
         Vector3[] positions = linePoints;
         //foreach (Vector2 position in positions)
         //{
@@ -104,7 +104,7 @@ public class LineofSightCheck : MonoBehaviour
         //}
         //return colliderPoints;
     }
-    public bool RaycastCheck(List<Vector2> points, string tagToCheck)
+    public bool RaycastCheck(List<Vector2> points, string tagToCheck) //check if raycast check hits an object with tagToCheck tag, could shit the bed if theres more than 99 hits but im sure that wont happen :)
     {
         bool returnValue = false;
         RaycastHit2D[] hit0 = new RaycastHit2D[99];

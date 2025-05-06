@@ -16,7 +16,7 @@ public class FentAbilities : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() // if the ability is active and the cooldown is over, make ability available again
     {
         if (ability1isactive == true)
         {
@@ -27,10 +27,10 @@ public class FentAbilities : MonoBehaviour
             }
         }
     }
-    public void Ability1()
+    public void Ability1() //activate ability of guard tower, this is called with UI Button
     {
         fent.GetComponent<Fent>().CallToArms();
-        ability1button.GetComponent<Button>().interactable = true;
+        ability1button.GetComponent<Button>().interactable = false;
         ability1isactive = true;
     }
 }

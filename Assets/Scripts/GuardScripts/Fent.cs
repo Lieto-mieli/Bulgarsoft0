@@ -102,17 +102,17 @@ public class Fent : GuardAITemplate
     }
     public void GameOver()
     {
-
+        //this will be a fail state
     }
-    new public void MoveToPosition()
+    public override void MoveToPosition()
     {
         //Cannot move
     }
-    new public void AttackTarget(GameObject target)
+    public override void AttackTarget(GameObject target)
     {
         //Cannot attack
     }
-    public void CallToArms()
+    public void CallToArms() // give all guards within 10 units a 1.3x multiplier in attack frequency for 15 seconds, with a cooldown of 45
     {
         ability1Targets = new List<GameObject>();
         if (curAbility1Cooldown <= 0)
