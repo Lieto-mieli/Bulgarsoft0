@@ -34,9 +34,9 @@ public class WaveManager : MonoBehaviour
     }
     public void SpawnEnemy() //kalle alkaa
     {
-        characterToSpawn = Random.Range(1, 3);
+        characterToSpawn = Random.Range(1, 3); //rnd kahden vihun välillä
         Debug.Log(characterToSpawn);
-        switch(characterToSpawn)
+        switch(characterToSpawn) //annetun numeron mukaan valitse vihu
         {
             case 1: chosenEnemy = Enemy1;
                 break;
@@ -44,12 +44,12 @@ public class WaveManager : MonoBehaviour
                 break;
         }
         Debug.Log(chosenEnemy); 
-        if (true)
-        {
-            Vector2 temp = new Vector2(Random.Range(0, 60), Random.Range(0, 50));
-            Instantiate(chosenEnemy, temp, new Quaternion()).transform.SetParent(valueTracker.gameplaySum.transform); //kalle loppuu
-        }
-    }
+        //if (true)
+        //{
+            Vector2 temp = new Vector2(Random.Range(0, 60), Random.Range(0, 50)); //random paikka spawnaus
+            Instantiate(chosenEnemy, temp, new Quaternion()).transform.SetParent(valueTracker.gameplaySum.transform); //luo vihu sijaintiin
+        //}
+    } //Lopu
     public void NewWave()
     {
         waveIntensity = Mathf.Pow(valueTracker.waveNum, 1.35f);

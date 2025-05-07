@@ -8,6 +8,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyAiTempRanged : EnemyAITemplate
 {
+    //kalle loi lieto 80% kalle 20%
     Vector3 CurPos;
     //bool doNotMove = false;
     int magSize;
@@ -18,7 +19,7 @@ public class EnemyAiTempRanged : EnemyAITemplate
         MovingToPosition,
         AttackingTarget,
     }
-    void Start()
+    void Start() //kalle alkaa(?)
     {
         
         moveSpeed = UnitStatsList.unitStats[3][0];
@@ -40,7 +41,7 @@ public class EnemyAiTempRanged : EnemyAITemplate
     public override void AttackTarget(GameObject target) //kalle alkaa
     {
         //Debug.Log(magSize);
-        if (magSize <= 0)
+        if (magSize <= 0) //sama ranged attack kun guardilla
         {
             //doNotMove = true;
             //reload
@@ -60,7 +61,7 @@ public class EnemyAiTempRanged : EnemyAITemplate
             //target.GetComponent<GuardAITemplate>().hitPoints -= attackDamage;
             base.endlag = base.attackEndlag;
         }
-    } //kalle loppuu
+    } 
 
     /*private void Update()
     {
@@ -72,5 +73,5 @@ public class EnemyAiTempRanged : EnemyAITemplate
         {
             moveSpeed = UnitStatsList.unitStats[3][0];
         }
-    }*/
+    }*/ //kalle loppuu tarkotus oli että vihu ei liiku ku lataa
 }

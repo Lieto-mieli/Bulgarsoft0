@@ -71,7 +71,7 @@ public class GuardAITemplate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x > 17.63)
+        if (transform.position.x > 17.63) //kalle, flippaa sprite kun eri puolilla basea
         {
             //KustomEulerAngles.y = 180f;
             transform.eulerAngles = new Vector3(0, 180f, 0);
@@ -82,7 +82,7 @@ public class GuardAITemplate : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0f, 0);
             //Debug.Log("yli");
             //KustomEulerAngles.y = 0f;
-        }
+        }//kalleloppi
 
         if (hitPoints <= 0) //if hitpoints go to/below 0, die
         {

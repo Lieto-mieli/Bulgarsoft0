@@ -28,35 +28,35 @@ public class Guard1AI : GuardAITemplate
         spriteRender = GetComponent<SpriteRenderer>();
         pathfinder = GameObject.FindWithTag("Pathfinder").GetComponent<Pathfinder>();
     }
-    public override void AttackTarget(GameObject target)
+    public override void AttackTarget(GameObject target) //ranged hyökkäys yritys
     {// kalle alkaa
         //Debug.Log(magSize);
-        if (magSize <= 0)
+        if (magSize <= 0) //jos tyhjä mag
         {
             //reload
             magSize = 10;
             Debug.Log("RELOADING");
-            base.cooldown = base.attackCooldown;
-            base.endlag = base.attackEndlag;
-            Debug.Log("lattaa");
+            base.cooldown = base.attackCooldown; //inheritatun cooldownin resettaus
+            base.endlag = base.attackEndlag; // sama mutta endlag 
+            Debug.Log("lattaa"); //endlag meinaa ettei voi tehö mitööön ja kooldown on ettei voi hyökätä
         }
-        else if (magSize >= 1)
+        else if (magSize >= 1) //jos täys mag
         {
             Debug.Log("mikesi toimi)");
             magSize--;
             //Debug.Log($"{gameObject.name} Attacks {target.name}");
             base.cooldown = base.attackCooldown;
-            GameObject tempBullet = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 1), Quaternion.identity);
-            tempBullet.GetComponent<Bullet>().TarPos = base.autoTarget.transform.position;
+            GameObject tempBullet = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 1), Quaternion.identity); //bullet spawnaus
+            tempBullet.GetComponent<Bullet>().TarPos = base.autoTarget.transform.position; //bullet targettaus mikään ei toimi
             //target.GetComponent<GuardAITemplate>().hitPoints -= attackDamage;
             base.endlag = base.attackEndlag;
         }
     }
 
-    public override void AttackMove()
+    public override void AttackMove() //yritys manuaali target hyökkäyksestä DEFUNCT
     {
-        GameObject tempBullet = new GameObject();
+        GameObject tempBullet = new GameObject(); //tyhjÄ?
         manualTarget = tempBullet;
-        tempBullet.transform.position = camera.ScreenToWorldPoint(Input.mousePosition);
+        tempBullet.transform.position = camera.ScreenToWorldPoint(Input.mousePosition); //ammu kursorin suuntaan
     } //kalle loppuu
 }

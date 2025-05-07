@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UnitStatsList : MonoBehaviour
 {
+    //lietokalle hybrid lieto kaikki, kalle ranged ja balance
     // moveSpeed 0, hitPoints 1, attackDamage 2, attackRange 3, attackCooldown 4, attackEndlag 5, defence 6, cost 7, size 8
     public static float[] guard1 = new float[] { 2f, 10f, 2f, 2f, 1.2f, 0.2f, 0f, 100f, 0.4f };   // 0
     public static float[] enemy1 = new float[] { 3f, 5f, 2f, 2f, 2.5f, 0.4f, 0f, 0f, 0.4f };      // 1
