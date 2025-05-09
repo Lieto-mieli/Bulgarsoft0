@@ -48,6 +48,7 @@ public class GuardAITemplate : MonoBehaviour
     public GuardState currentState;
     public float atkSpeedMult = 1;
     public Vector3 KustomEulerAngles;
+    public GameController gameController;
     public enum GuardState
     {
         Passive,
