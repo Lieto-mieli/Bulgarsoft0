@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
 
 public class ValueTracker : MonoBehaviour
 {
@@ -53,6 +55,12 @@ public class ValueTracker : MonoBehaviour
                 preWave = false;
             }
         }
+        //c
+        if (playerUnits.Count == 0)
+        {
+            SceneManager.LoadScene("EndMenu");
+        }
+        //c
     }
     public void PreWave()
     {

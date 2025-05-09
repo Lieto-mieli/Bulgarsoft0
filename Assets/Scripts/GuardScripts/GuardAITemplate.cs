@@ -48,6 +48,7 @@ public class GuardAITemplate : MonoBehaviour
     public GuardState currentState;
     public float atkSpeedMult = 1;
     public Vector3 KustomEulerAngles;
+    public GameController gameController;
     public enum GuardState
     {
         Passive,
@@ -66,6 +67,9 @@ public class GuardAITemplate : MonoBehaviour
         targetLists.playerTargets.Add(gameObject);
         spriteRender = GetComponent<SpriteRenderer>();
         pathfinder = GameObject.FindWithTag("Pathfinder").GetComponent<Pathfinder>();
+        //c
+        //controller = FindObjectOfType<GAMECONTROLLER>();
+        //c
     }
 
     // Update is called once per frame
@@ -94,6 +98,16 @@ public class GuardAITemplate : MonoBehaviour
             }
             valueTracker.guardsLost++;
             Destroy(gameObject);
+            //c
+            //if (GameController.Instance != null)
+            //{
+            //    GameController.Instance.GameOver();
+            //}
+            //else
+            //{
+            //    Debug.LogError("GameController.Instance is null!");
+            //}
+            //c
         }
         cooldown -= Time.deltaTime;
         endlag -= Time.deltaTime;
