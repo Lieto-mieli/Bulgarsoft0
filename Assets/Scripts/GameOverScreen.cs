@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GameOverScreen : MonoBehaviour
 {
+    //c
+    //c
     public Text pointsText;
 
     public void setup(int score)

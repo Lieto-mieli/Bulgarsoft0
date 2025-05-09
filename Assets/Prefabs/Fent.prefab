@@ -114,10 +114,15 @@ MonoBehaviour:
   ignoreTargets: 0
   curPos: {x: 0, y: 0, z: 0}
   targetPos: {x: 0, y: 0}
+  cooldown: 0
+  endlag: 0
+  autoTarget: {fileID: 0}
+  manualTarget: {fileID: 0}
   spriteRender: {fileID: 0}
   pathfinder: {fileID: 0}
   currentState: 0
   atkSpeedMult: 1
+  KustomEulerAngles: {x: 0, y: 0, z: 0}
   curAbility1Cooldown: 0
 --- !u!61 &4436097998346993053
 BoxCollider2D:
