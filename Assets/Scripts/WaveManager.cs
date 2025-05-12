@@ -1,41 +1,59 @@
 using SuperTiled2Unity;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
     float spawnDelay;
     public float waveIntensity;
+    public bool bossWave;
     public int waveMagnitude;
     public GameObject Enemy1;
     public GameObject Enemy2;
+    public GameObject A7VBoss;
+    public GameObject bossNotification;
     public ValueTracker valueTracker;
     public AttackTargetLists targetLists;
     public SuperMap map;
     private int characterToSpawn;
     private GameObject chosenEnemy;
     // Start is called before the first frame update
-
+    private void Start()
+    {
+        bossWave = true;
+        A7VBoss.SetActive(false);
+        bossNotification.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
-        if (waveMagnitude <= 0 && targetLists.enemyTargets.Count == 0)
+        if (waveMagnitude <= 0 && targetLists.enemyTargets.Count == 0 && bossWave == false)
         {
             valueTracker.PostWave();
         }
         if (spawnDelay < 0 && waveMagnitude > 0) 
         { 
             spawnDelay = (10/waveIntensity)*Random.Range(0.8f, 1.2f);
-            SpawnEnemy();
+            if(bossWave == false)
+            {
+                SpawnEnemy();
+            }
+            else if (bossWave == true)
+            {
+                A7VBoss.SetActive(true);
+                bossNotification.SetActive(true);
+            }
             waveMagnitude -= 1;
         }
         spawnDelay -= Time.deltaTime;
     }
+
     public void SpawnEnemy() //kalle alkaa
     {
-        characterToSpawn = Random.Range(1, 3); //rnd kahden vihun välillä
-        Debug.Log(characterToSpawn);
+        characterToSpawn = Random.Range(1, 3); //rnd kahden vihun valilla
+        //Debug.Log(characterToSpawn);
         switch(characterToSpawn) //annetun numeron mukaan valitse vihu
         {
             case 1: chosenEnemy = Enemy1;

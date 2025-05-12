@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,16 +11,24 @@ public class Fent : GuardAITemplate
     static float ability1Cooldown = 45;
     static float ability1Duration = 15;
     public float curAbility1Cooldown;
+    public float maxHitPoints;
     float curAbility1Duration;
+    public Vector3 personalCurPos;
     List<GameObject> ability1Targets;
+    public TextMeshPro hpCount;
     bool ability1Active;
-    void Start()
+    public void Awake()
+    {
+        personalCurPos = transform.position; //jos on startissa niin tank shell ja a7v ei ehi hakea sijaintia
+    }
+    public void Start()
     {
         ability1Active = false;
         moveSpeed = UnitStatsList.unitStats[2][0];
         hitPoints = UnitStatsList.unitStats[2][1];
         maxHp = UnitStatsList.unitStats[2][1];
         size = UnitStatsList.unitStats[2][8];
+        maxHitPoints = hitPoints;
         selected = false;
         selector = GameObject.FindWithTag("Selector");
         targetLists = GameObject.FindWithTag("TargetLists").GetComponent<AttackTargetLists>();
@@ -31,6 +40,7 @@ public class Fent : GuardAITemplate
     // Update is called once per frame
     void Update()
     {
+        hpCount.text = hitPoints + " / " + maxHitPoints;
         curAbility1Cooldown -= Time.deltaTime;
         curAbility1Duration -= Time.deltaTime;
         //Debug.Log(selector.name);

@@ -6,7 +6,6 @@ using UnityEngine.Tilemaps;
 using SuperTiled2Unity;
 using System.IO;
 using System;
-using static UnityEditor.PlayerSettings;
 
 public class Pathfinding {
 

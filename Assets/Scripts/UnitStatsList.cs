@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class UnitStatsList : MonoBehaviour
 {
-    //lietokalle hybrid lieto kaikki, kalle ranged ja balance
     // moveSpeed 0, hitPoints 1, attackDamage 2, attackRange 3, attackCooldown 4, attackEndlag 5, defence 6, cost 7, size 8
     public static float[] guard1 = new float[] { 2f, 10f, 2f, 2f, 1.2f, 0.2f, 0f, 100f, 0.4f };   // 0
     public static float[] enemy1 = new float[] { 3f, 5f, 2f, 2f, 2.5f, 0.4f, 0f, 0f, 0.4f };      // 1
     public static float[] fent = new float[] { 0f, 100f, 0f, 0f, 99f, 99f, 1f, 300f, 1f };      // 2
     public static float[] rangedEnemy = new float[] { 2f, 3f, 3f, 6f, 1.25f, 0.4f, 0f, 0f, 0.4f };      // 3
     public static float[] mortar = new float[] { 1f, 5f, 9f, 11f, 4.5f, 1.25f, 0f, 700f, 0.6f };      // 4
+    public static float[] a7vBody = new float[] { 0.25f, 60f, 0f, 0f, 5f, 1f, 0f, 0f, 1f };      // 5
     public static string guard1Image = "sotilas_1";
     public static string enemy1Image = "sotilas_1";
     public static string fentImage = "TOWER";
@@ -24,7 +24,7 @@ public class UnitStatsList : MonoBehaviour
     public static string rangedDesc = "PLACEHOLDER PLACEHOLDER! PLACEHOLDER...";
     public static string mortarDesc = "Able to bombard enemies in a large area from afar, but struggles up close due to friendly fire.";
     public static List<string> IDList = new() { "Guard", "enemy1", "tower", "rangedEnemy", "Mortar" };
-    public static List<float[]> unitStats = new() { guard1, enemy1, fent, rangedEnemy, mortar };
+    public static List<float[]> unitStats = new() { guard1, enemy1, fent, rangedEnemy, mortar, a7vBody };
     public static List<string> unitImages = new() { guard1Image, enemy1Image, fentImage, rangedImage, mortarImage };
     public static List<string> unitDescriptions = new() { guard1Desc, enemy1Desc, fentDesc, rangedDesc, mortarDesc };
 }

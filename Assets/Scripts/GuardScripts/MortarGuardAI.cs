@@ -53,6 +53,10 @@ public class MortarGuardAI : GuardAITemplate
             {
                 c.gameObject.GetComponent<EnemyAITemplate>().hitPoints -= attackDamage;
             }
+            if(c.gameObject.CompareTag("Boss")) //enemy tagi paskoo nii jos pitaa boss tagin ja lisaa listiin nii toimii
+            {
+                c.gameObject.GetComponent<A7VMain>().hitPoints -= attackDamage;
+            }
         }
         base.endlag = base.attackEndlag / atkSpeedMult;
     }

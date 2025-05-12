@@ -73,5 +73,5 @@ public class EnemyAiTempRanged : EnemyAITemplate
         {
             moveSpeed = UnitStatsList.unitStats[3][0];
         }
-    }*/ //kalle loppuu tarkotus oli että vihu ei liiku ku lataa
+    }*/ //kalle loppuu tarkotus oli etta vihu ei liiku ku lataa
 }
