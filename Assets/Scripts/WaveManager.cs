@@ -15,44 +15,73 @@ public class WaveManager : MonoBehaviour
     public SuperMap map;
     private int characterToSpawn;
     private GameObject chosenEnemy;
-    // Start is called before the first frame update
+    public SuperCustomProperties superCustomProperties;
+    private List<Transform> walkableTiles = new List<Transform>();
 
-    // Update is called once per frame
+    void Start()
+    {
+        CacheWalkableTiles(); // Populate walkable tiles once
+    }
+
     void Update()
     {
         if (waveMagnitude <= 0 && targetLists.enemyTargets.Count == 0)
         {
             valueTracker.PostWave();
         }
-        if (spawnDelay < 0 && waveMagnitude > 0) 
-        { 
-            spawnDelay = (10/waveIntensity)*Random.Range(0.8f, 1.2f);
+
+        if (spawnDelay < 0 && waveMagnitude > 0)
+        {
+            spawnDelay = (10 / waveIntensity) * Random.Range(0.8f, 1.2f);
             SpawnEnemy();
             waveMagnitude -= 1;
         }
+
         spawnDelay -= Time.deltaTime;
     }
-    public void SpawnEnemy() //kalle alkaa
+
+    void CacheWalkableTiles()
     {
-        characterToSpawn = Random.Range(1, 3); //rnd kahden vihun välillä
-        Debug.Log(characterToSpawn);
-        switch(characterToSpawn) //annetun numeron mukaan valitse vihu
+        SuperCustomProperties[] allTiles = FindObjectsOfType<SuperCustomProperties>();
+        foreach (var tileProps in allTiles)
         {
-            case 1: chosenEnemy = Enemy1;
-                break;
-            case 2: chosenEnemy = Enemy2;
-                break;
+            if (tileProps.HasProperty("passable") && tileProps.GetInt("passable") == 1)
+            {
+                walkableTiles.Add(tileProps.transform);
+            }
         }
-        Debug.Log(chosenEnemy); 
-        //if (true)
-        //{
-            Vector2 temp = new Vector2(Random.Range(0, 60), Random.Range(0, 50)); //random paikka spawnaus
-            Instantiate(chosenEnemy, temp, new Quaternion()).transform.SetParent(valueTracker.gameplaySum.transform); //luo vihu sijaintiin
-        //}
-    } //Lopu
+
+        if (walkableTiles.Count == 0)
+        {
+            Debug.LogWarning("No walkable tiles found! Enemies won't spawn.");
+        }
+    }
+
+    public void SpawnEnemy()
+    {
+        if (walkableTiles.Count == 0)
+        {
+            Debug.LogWarning("Spawn failed: No walkable tiles available.");
+            return;
+        }
+
+        characterToSpawn = Random.Range(1, 3);
+        Debug.Log(characterToSpawn);
+
+        switch (characterToSpawn)
+        {
+            case 1: chosenEnemy = Enemy1; break;
+            case 2: chosenEnemy = Enemy2; break;
+        }
+
+        Transform spawnTile = walkableTiles[Random.Range(0, walkableTiles.Count)];
+        GameObject enemy = Instantiate(chosenEnemy, spawnTile.position, Quaternion.identity);
+        enemy.transform.SetParent(valueTracker.gameplaySum.transform);
+    }
+
     public void NewWave()
     {
         waveIntensity = Mathf.Pow(valueTracker.waveNum, 1.35f);
-        waveMagnitude = (int)(Mathf.Pow(valueTracker.waveNum, 1.35f)*2);
+        waveMagnitude = (int)(Mathf.Pow(valueTracker.waveNum, 1.35f) * 2);
     }
 }
