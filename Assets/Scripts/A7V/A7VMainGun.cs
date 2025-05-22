@@ -16,11 +16,11 @@ public class A7VMainGun : MonoBehaviour
     }
     public void Update()
     {
-        if (mainRef.AttackCooldown > (mainRef.phaseCooldown - 0.1f) && mainRef.state == A7VMain.A7VState.DestroyingBase) //0.1 sekunnin muzzleflash, attackcooldown kertoo paljoko jaljella ja phasecooldown kertoo koko cooldownin pituuden
+        if (mainRef.AttackCooldown > (mainRef.phaseCooldown - 0.1f) && mainRef.state == A7VMain.A7VState.FirstPhase) //0.1 sekunnin muzzleflash, attackcooldown kertoo paljoko jaljella ja phasecooldown kertoo koko cooldownin pituuden
         {
             mFlash.gameObject.SetActive(true);
         }
-        else if (mainRef.AttackCooldown < (mainRef.phaseCooldown - 0.1f) && mainRef.state == A7VMain.A7VState.DestroyingBase)
+        else if (mainRef.AttackCooldown < (mainRef.phaseCooldown - 0.1f) && mainRef.state == A7VMain.A7VState.FirstPhase)
         {
             mFlash.gameObject.SetActive(false);
         }

@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TarPos: {x: 0, y: 0}
+  rb2d: {fileID: 0}
 --- !u!50 &-4353205332749829468
 Rigidbody2D:
   serializedVersion: 4

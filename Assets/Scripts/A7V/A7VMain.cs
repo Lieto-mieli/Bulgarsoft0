@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static GuardAITemplate;
@@ -10,14 +12,17 @@ public class A7VMain : MonoBehaviour
 {
     public A7VFlameThrowers ThrowerScript;
     public A7VMainGun MainGunScript;
+    public DisplayStandard Display;
     public float moveSpeed;
     public float hitPoints;
+    public int displayableHitPoints;
     public float maxHitPoints;
     public float size;
     public float AttackCooldown;
     public float phaseCooldown; //vaiha rpm phasen mukaan
     public GameObject DeploymentGameobject;
     public TextMeshPro hpCount;
+    public TextMeshPro SecondPhaseText;
     public Vector3 curPos;
     public Vector3 tarPos;
     public A7VState state;
@@ -26,10 +31,12 @@ public class A7VMain : MonoBehaviour
     public enum A7VState //statet lahestymista ja tuhoamista varten
     {
         movingToPosition,
-        DestroyingBase
+        FirstPhase,
+        SecondPhase
     }
     void Start()
     {
+        SecondPhaseText.gameObject.SetActive(false);
         DeploymentGameobject.gameObject.SetActive(false);
         state = A7VState.movingToPosition; //spawnatessa liiku
         tarPos.x = TowerRef.personalCurPos.x;//tornin sijainti
@@ -53,27 +60,25 @@ public class A7VMain : MonoBehaviour
     {
         DeploymentGameobject.gameObject.SetActive(true);
     }
-    void SecondPhase() //metodi koska jos haluaa lisata jotain muuta jatkossa
-    {
-        phaseCooldown = 4; //attack cooldown on yhtasuurikuin phasecooldown
-    }
     void Update()
     {
-        hpCount.text = hitPoints + " / " + maxHitPoints; //display hp bossin ppaalla
+        displayableHitPoints = (int)Math.Ceiling(hitPoints); //displayable hp = hp mutta kokonaislukuina repairia varten
+        hpCount.text = displayableHitPoints + " / " + maxHitPoints; //display hp bossin ppaalla
         curPos = transform.position; //updatee sijaintia jotta tiedetaan kuinka lahella ollaan
 
         if(hitPoints <= 0)
         {
             Destroy(gameObject);
         }
-        if(hitPoints <= maxHitPoints / 3)
+        else if(hitPoints <= maxHitPoints / 2)
         {
-            SecondPhase(); //vaihda cooldowni puolikkaaseen aiemmasta kun 1/3 hp jalella
+            phaseCooldown = 4;
+            state = A7VState.SecondPhase;//vaihda cooldowni puolikkaaseen aiemmasta kun 1/3 hp jalella ja vaihda tokaan phaseen
         }
 
         if(state == A7VState.movingToPosition && Vector2.Distance((Vector2)curPos, tarPos) < 9) //kun kohteessa
         {
-            state = A7VState.DestroyingBase; //alota tuhoaminen
+            state = A7VState.FirstPhase; //alota tuhoaminen
             DeployTroops();
             phaseCooldown = 8f; //alota cooldown 8sta ja laske 4aan tokassa phasessa
             foreach (var Thrower in Throwers) //kay jokainen liekinheitinlapi ja aktivoi keycode jalkee
@@ -85,7 +90,7 @@ public class A7VMain : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(curPos, tarPos, moveSpeed * Time.deltaTime); //liiku jos ei kohteessa viela
         }
-        else if(state == A7VState.DestroyingBase) //kutsu maingunin kautta tuhoamisen alotus
+        else if(state == A7VState.FirstPhase) //kutsu maingunin kautta tuhoamisen alotus
         {
             if (AttackCooldown > 0f) //cooldowni
             {
@@ -96,6 +101,11 @@ public class A7VMain : MonoBehaviour
                 MainGunScript?.DestroyBase(); //ettei null ja kutsu
                 AttackCooldown = phaseCooldown; //8sta neljaan
             }
+        }
+        else if(state == A7VState.SecondPhase)
+        {
+            SecondPhaseText.gameObject.SetActive(true); //display repair teksti
+            hitPoints += (1f / Display.Frequency);//repairaa noin 1hp sekunnissa
         }
     }
 }

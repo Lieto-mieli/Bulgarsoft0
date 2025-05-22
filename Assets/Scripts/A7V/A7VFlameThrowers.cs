@@ -9,6 +9,7 @@ public class A7VFlameThrowers : MonoBehaviour
     /* Ongelma korjattu movesin tan koodin vaan niihi projectile systeemeihin*/
 
     public ParticleSystem fThrower;
+    public DisplayStandard Display;
     public void Awake()
     {
         fThrower = GetComponent<ParticleSystem>(); //hae liekinheitin komponentit
@@ -19,7 +20,8 @@ public class A7VFlameThrowers : MonoBehaviour
         //Debug.Log("TOIMII AHH PRE");
         if (other.CompareTag("Guard")) //jos osuu puolustajiin
         {
-            other.gameObject.GetComponent<GuardAITemplate>().hitPoints -= 0.05f; //drainaa puolustajien hp, sama periaate kun bulletilla kaytannössa
+            //Debug.Log(Display.Frequency+ " " + 5f/Display.Frequency);
+            other.gameObject.GetComponent<GuardAITemplate>().hitPoints -= (5f / Display.Frequency); //drainaa puolustajien hp, siten että tekee total 5 damagea sekunnissa
         }
     }
     public void Engage() //metodi jota kutsutaan mainin kautta jos halutaan kaynnistaa liekinheittimet
