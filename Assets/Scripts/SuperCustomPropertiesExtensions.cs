@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+//C
 public static class SuperCustomPropertiesExtensions
 {
     public static bool HasProperty(this SuperCustomProperties props, string key)
@@ -31,3 +31,4 @@ public static class SuperCustomPropertiesExtensions
         return 0;
     }
 }
+//C

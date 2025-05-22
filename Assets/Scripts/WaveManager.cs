@@ -17,7 +17,7 @@ public class WaveManager : MonoBehaviour
     private GameObject chosenEnemy;
     public SuperCustomProperties superCustomProperties;
     private List<Transform> walkableTiles = new List<Transform>();
-
+    //C re made 
     void Start()
     {
         CacheWalkableTiles(); // Populate walkable tiles once
