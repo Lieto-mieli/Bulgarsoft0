@@ -21,6 +21,8 @@ public class UpgradeSystem : MonoBehaviour
     void Start()
     {
         upgradeAttackButton.onClick.AddListener(UpgradeAttackDamage);
+        upgradeReloadSpeed.onClick.AddListener(UpgradeReloadSpeed);
+        upgradeHealth.onClick.AddListener(UpgradeHealth);
     }
 
     void UpgradeAttackDamage()
