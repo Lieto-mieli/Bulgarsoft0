@@ -17,7 +17,7 @@ public class EnemyAITemplate : MonoBehaviour
     public AttackTargetLists targetLists;
     public ValueTracker valueTracker;
     bool ignoreTargets;
-    Vector3 curPos;
+    public Vector3 curPos;
     public Vector2 targetPos;
     public float cooldown;
     public float endlag;

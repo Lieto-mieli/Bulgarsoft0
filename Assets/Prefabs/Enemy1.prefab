@@ -108,6 +108,7 @@ MonoBehaviour:
   size: 0
   targetLists: {fileID: 0}
   valueTracker: {fileID: 0}
+  curPos: {x: 0, y: 0, z: 0}
   targetPos: {x: 0, y: 0}
   cooldown: 0
   endlag: 0

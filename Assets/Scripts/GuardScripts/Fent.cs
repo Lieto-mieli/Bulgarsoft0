@@ -9,12 +9,21 @@ public class Fent : GuardAITemplate
     // Start is called before the first frame update
     static float ability1Cooldown = 45;
     static float ability1Duration = 15;
+    static float ability2Cooldown = 120;
     public float curAbility1Cooldown;
+    public float curAbility2Cooldown;
     float curAbility1Duration;
     List<GameObject> ability1Targets;
+    List<GameObject> ability2Targets;
     bool ability1Active;
+    bool ability2Active;
+    public GameObject bomberPrefab;
+    public float xPos = -15f;
+    public float yPos = 3f;
+    public float zPos = 0f;
     void Start()
     {
+        ability2Active = false;
         ability1Active = false;
         moveSpeed = UnitStatsList.unitStats[2][0];
         hitPoints = UnitStatsList.unitStats[2][1];
@@ -33,6 +42,7 @@ public class Fent : GuardAITemplate
     {
         curAbility1Cooldown -= Time.deltaTime;
         curAbility1Duration -= Time.deltaTime;
+        curAbility2Cooldown -= Time.deltaTime;
         //Debug.Log(selector.name);
         selected = selector.GetComponent<Selector>().buildingSelected == this.gameObject;
         if (hitPoints <= 0)
@@ -42,8 +52,8 @@ public class Fent : GuardAITemplate
         if (curAbility1Duration <= 0)
         {
             ability1Active = false;
-        } 
-        if (ability1Targets!=null)
+        }
+        if (ability1Targets != null)
         {
             if (!ability1Active && ability1Targets.Count != 0)
             {
@@ -68,6 +78,12 @@ public class Fent : GuardAITemplate
                 }
             }
         }
+
+        if (selected && Input.GetKeyDown(KeyCode.B))
+        {
+            CallToBombs();
+        }
+
         Collider2D[] results = Physics2D.OverlapBoxAll(transform.position, new Vector2(size, size), 0);
         foreach (Collider2D c in results)
         {
@@ -125,12 +141,22 @@ public class Fent : GuardAITemplate
                     ability1Targets.Add(guard);
                 }
             }
-            foreach(GameObject guard in ability1Targets)
+            foreach (GameObject guard in ability1Targets)
             {
                 guard.GetComponent<GuardAITemplate>().atkSpeedMult = 1.3f;
             }
             ability1Active = true;
             curAbility1Duration = ability1Duration;
+        }
+    }
+
+    public void CallToBombs()
+    {
+        if (curAbility2Cooldown <= 0)
+        {
+            curAbility2Cooldown = ability2Cooldown;
+            Vector3 spawnPos = transform.position + new Vector3(xPos, yPos, zPos);
+            GameObject bomber = Instantiate(bomberPrefab, spawnPos, Quaternion.identity);
         }
     }
 }

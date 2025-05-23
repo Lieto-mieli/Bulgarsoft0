@@ -11,7 +11,8 @@ public class BuyableScrollMenu : MonoBehaviour
     private static List<string> unitList = new List<string>() { 
         "Guard" ,
         //"tower" ,
-        "Mortar"
+        "Mortar",
+        "Bomber"
     }; //this will change depending on player unlocks
     private int nroOfUnits;
     public List<GameObject> selectButtonList = new List<GameObject>();

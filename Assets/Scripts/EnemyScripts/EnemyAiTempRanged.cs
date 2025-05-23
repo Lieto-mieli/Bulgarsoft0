@@ -9,7 +9,7 @@ using static UnityEngine.GraphicsBuffer;
 public class EnemyAiTempRanged : EnemyAITemplate
 {
     //kalle loi lieto 80% kalle 20%
-    Vector3 CurPos;
+    public Vector3 CurPos;
     //bool doNotMove = false;
     int magSize;
     public GameObject projectile;
@@ -21,7 +21,7 @@ public class EnemyAiTempRanged : EnemyAITemplate
     }
     void Start() //kalle alkaa(?)
     {
-        
+
         moveSpeed = UnitStatsList.unitStats[3][0];
         hitPoints = UnitStatsList.unitStats[3][1];
         maxHp = UnitStatsList.unitStats[3][1];
@@ -36,6 +36,11 @@ public class EnemyAiTempRanged : EnemyAITemplate
         targetLists.enemyTargets.Add(gameObject);
         spriteRender = GetComponent<SpriteRenderer>();
         magSize = 10;
+    }
+
+    private void Update()
+    {
+        CurPos = transform.position;
     }
     //Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 1), Quaternion.identity);
     public override void AttackTarget(GameObject target) //kalle alkaa
