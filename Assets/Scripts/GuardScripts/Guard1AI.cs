@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Guard1AI : GuardAITemplate
 {
@@ -59,4 +61,5 @@ public class Guard1AI : GuardAITemplate
         manualTarget = tempBullet;
         tempBullet.transform.position = camera.ScreenToWorldPoint(Input.mousePosition); //ammu kursorin suuntaan
     } //kalle loppuu
+    
 }

@@ -38,6 +38,9 @@ public class ValueTracker : MonoBehaviour
         }
         waveNum = 1;
         playerCash = 0;
+        //C
+        UpgradeSystem.Instance.upgradePoints = 0;
+        //C
         PreWave();
     }
     void Update()
@@ -89,6 +92,7 @@ public class ValueTracker : MonoBehaviour
         float cashBefore = playerCash;
         //monetary changes to playe cash happen here!!
         playerCash += waveNum * 150;
+        UpgradeSystem.Instance.upgradePoints = 2;
 
         gameplaySum.SetActive(false);
         postWaveDayCount.text = $"Day {waveNum} Completed";
