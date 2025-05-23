@@ -114,6 +114,7 @@ MonoBehaviour:
   spriteRender: {fileID: 0}
   pathfinder: {fileID: 0}
   autoTarget: {fileID: 0}
+  gunAudio: {fileID: 0}
 --- !u!61 &8837328108150347007
 BoxCollider2D:
   m_ObjectHideFlags: 0

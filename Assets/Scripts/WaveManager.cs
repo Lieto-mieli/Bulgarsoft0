@@ -20,6 +20,8 @@ public class WaveManager : MonoBehaviour
     public Camera mainCamera; // Reference to the main camera for line-of-sight checks
 
     //C re made 
+
+    // HÄTÄTILANNETTA VARTEN ÄLÄ POISTA
     //void Start()
     //{
     //    CacheWalkableTiles(); // Populate walkable tiles once

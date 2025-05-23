@@ -9,8 +9,13 @@ public class UpgradePointDisplay : MonoBehaviour
 {
     //public Text upgradeText; // Reference to a UI Text component
     public TMP_Text upgradeText;
-    int currentPoints = UpgradeSystem.Instance.upgradePoints;
+    public UpgradeSystem upgradeSystem;
+    int currentPoints;
 
+    private void Start()
+    {
+        currentPoints = UpgradeSystem.Instance.upgradePoints;
+    }
 
     void Update()
     {

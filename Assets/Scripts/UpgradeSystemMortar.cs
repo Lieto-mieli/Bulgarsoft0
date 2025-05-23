@@ -10,11 +10,13 @@ public class UpgradeSystemMortar : MonoBehaviour
     public Button upgradeAttackButton;
     public Button upgradeReloadSpeed;
     public Button upgradeHealth;
+    public UpgradeSystem upgradeSystem;
 
-    int currentPoints = UpgradeSystem.Instance.upgradePoints;
+    int currentPoints;
 
     void Start()
     {
+        currentPoints = upgradeSystem.upgradePoints;
         upgradeAttackButton.onClick.AddListener(UpgradeAttackDamage);
         upgradeReloadSpeed.onClick.AddListener(UpgradeReloadSpeed);
         upgradeHealth.onClick.AddListener(UpgradeHealth);

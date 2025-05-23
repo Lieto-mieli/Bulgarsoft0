@@ -13,6 +13,8 @@ public class EnemyAiTempRanged : EnemyAITemplate
     //bool doNotMove = false;
     int magSize;
     public GameObject projectile;
+    public AudioClip gunshotClip; // Assign in Inspector or load in code
+    private AudioSource audioSource;
     enum EnemyState
     {
         Passive,
@@ -36,6 +38,8 @@ public class EnemyAiTempRanged : EnemyAITemplate
         targetLists.enemyTargets.Add(gameObject);
         spriteRender = GetComponent<SpriteRenderer>();
         magSize = 10;
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
     }
     //Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 1), Quaternion.identity);
     public override void AttackTarget(GameObject target) //kalle alkaa
@@ -57,6 +61,7 @@ public class EnemyAiTempRanged : EnemyAITemplate
             //Debug.Log($"{gameObject.name} Attacks {target.name}");
             base.cooldown = base.attackCooldown;
             GameObject tempBullet = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 1), Quaternion.identity);
+            audioSource.PlayOneShot(gunshotClip);
             tempBullet.GetComponent<Bullet>().TarPos = base.autoTarget.transform.position;
             //target.GetComponent<GuardAITemplate>().hitPoints -= attackDamage;
             base.endlag = base.attackEndlag;

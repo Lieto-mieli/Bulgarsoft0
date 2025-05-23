@@ -8,6 +8,8 @@ public class Guard1AI : GuardAITemplate
 {
     int magSize;
     public GameObject projectile;
+    public AudioClip gunshotClip; // Assign in Inspector or load in code
+    private AudioSource audioSource;
     void Start()
     {
         //Guard1Stats
@@ -29,6 +31,9 @@ public class Guard1AI : GuardAITemplate
         targetLists.playerTargets.Add(gameObject);
         spriteRender = GetComponent<SpriteRenderer>();
         pathfinder = GameObject.FindWithTag("Pathfinder").GetComponent<Pathfinder>();
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+
     }
     public override void AttackTarget(GameObject target) //ranged hyökkäys yritys
     {// kalle alkaa
@@ -49,6 +54,7 @@ public class Guard1AI : GuardAITemplate
             //Debug.Log($"{gameObject.name} Attacks {target.name}");
             base.cooldown = base.attackCooldown;
             GameObject tempBullet = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, 1), Quaternion.identity); //bullet spawnaus
+            audioSource.PlayOneShot(gunshotClip);
             tempBullet.GetComponent<Bullet>().TarPos = base.autoTarget.transform.position; //bullet targettaus mikään ei toimi
             //target.GetComponent<GuardAITemplate>().hitPoints -= attackDamage;
             base.endlag = base.attackEndlag;

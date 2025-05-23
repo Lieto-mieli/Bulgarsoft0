@@ -7,6 +7,8 @@ public class MortarGuardAI : GuardAITemplate
     public float AoESize;
     public GameObject explosionParent;
     public List<ParticleSystem> explosion;
+    public AudioClip gunshotClip; // Assign in Inspector or load in code
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +33,14 @@ public class MortarGuardAI : GuardAITemplate
         targetLists.playerTargets.Add(gameObject);
         spriteRender = GetComponent<SpriteRenderer>();
         pathfinder = GameObject.FindWithTag("Pathfinder").GetComponent<Pathfinder>();
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
     }
     public override void AttackTarget(GameObject target)
     {
         base.cooldown = base.attackCooldown / atkSpeedMult;
         GameObject temp = Instantiate(explosionParent, target.transform.position, new Quaternion());
+        audioSource.PlayOneShot(gunshotClip);
         temp.GetComponent<ParticleSystem>().Play();
         //temp.GetComponentsInChildren<ParticleSystem>(explosion);
         //foreach (ParticleSystem par in explosion)
